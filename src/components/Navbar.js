@@ -3,7 +3,6 @@ import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { FaGem, FaHeart } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import './Navbar.scss'
-import { useState } from 'react';
 const Navbar = (projectSelected, onUpdate) => {
 
 
@@ -29,8 +28,8 @@ const Navbar = (projectSelected, onUpdate) => {
             <p>MENU</p>
             {projectSelected.projectSelected ?
                 <Menu iconShape="square">
-                    <MenuItem icon={<FaGem />}>Dashboard <Link to="/" onClick={() => onUpdate(false)} /></MenuItem>
-                    <MenuItem icon={<FaGem />}>Project <Link to="/project" /></MenuItem>
+                    <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" onClick={() => onUpdate(false)} /></MenuItem>
+                    <MenuItem icon={<FaGem />}>Project <Link to={"/project/"} /></MenuItem>
                     <SubMenu title="Screening" icon={<FaHeart />}>
                         {screenings.map(screening => (
                             <MenuItem>{screening.name} <Link to={"/screening/" + screening.id.toString()} /> </MenuItem>
@@ -44,8 +43,6 @@ const Navbar = (projectSelected, onUpdate) => {
                         <MenuItem>Component 1<Link to="/projects" /></MenuItem>
                         <MenuItem>Component 2</MenuItem>
                     </SubMenu>
-
-                    <MenuItem icon={<FaGem />}>Dashboard <Link to="/" /></MenuItem>
                 </Menu>
                 :
                 <Menu iconShape="square">

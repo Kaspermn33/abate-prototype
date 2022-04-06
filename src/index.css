@@ -165,6 +165,26 @@ code {
   color: #1F384C;
 }
 
+.project-text {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  margin-left: 20px;
+  margin-right:20px;
+}
+
+.recent-item {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  margin-left: 20px;
+  margin-right:20px;
+}
+
 .project {
   padding-left: 20px;
 }

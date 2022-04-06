@@ -29,6 +29,27 @@ function App() {
           name: 'Rasmus'
         }
       ],
+      screenings: [
+        {
+          id: 1,
+          name: 'Screening 1',
+          lastEdit: 'April 6th',
+        }
+      ],
+      lca: [
+        {
+          id: 1,
+          name: 'lca 1',
+          lastEdit: 'April 6th',
+        }
+      ],
+      costs: [
+        {
+          id: 1,
+          name: 'cost 1',
+          lastEdit: 'April 6th',
+        }
+      ],
     },
     {
       id: 2,
