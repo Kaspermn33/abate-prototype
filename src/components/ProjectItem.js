@@ -2,7 +2,7 @@ import React from 'react'
 import { FaFolder } from 'react-icons/fa'
 import { useNavigate, generatePath } from "react-router-dom";
 
-const ProjectItem = ({ project, onUpdate }) => {
+const ProjectItem = ({ project, onUpdate, recent }) => {
     const navigate = useNavigate();
     const onClick = () => {
         onUpdate(true);
@@ -16,7 +16,11 @@ const ProjectItem = ({ project, onUpdate }) => {
 
     return (
         <div className='project-item'> 
-            <h3 onClick={onClick} >  <FaFolder />{project.name}</h3>
+            {!recent 
+            ? <h3 onClick={onClick}> <FaFolder/>{project.name}</h3>
+            : <h3 onClick={onClick}> <FaFolder/>{project.name} Last worked on {project.lastEdit}</h3>
+            }
+
         </div>
     )
 }

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -38,6 +39,7 @@ code {
 
 .user {
   text-align: right;
+  font-family: 'Poppins';
 }
 
 .dashboard {
@@ -50,7 +52,7 @@ code {
 
 .recent-projects {
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 43px;
   width: 586px;
   height: 341px;
 
@@ -79,7 +81,7 @@ code {
 .your-projects {
   flex-direction: row;
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 92px;
   width: 829px;
   height: 804px;
 
@@ -93,6 +95,7 @@ code {
 
 .box-header {
   font-size: 32px;
+  font-family: 'Poppins';
   height: 61px;
   padding-left: 20px;
   padding-top: 21px;
@@ -109,10 +112,41 @@ code {
 
 .project-item {
   padding-left: 20px;
+  margin-top: 5x;
   line-height: 30px;
+  font-family: 'Poppins';
 }
 
 
 .project-item:hover {
   background-color: #F1F2F7;
+}
+
+.search-projects {
+  margin-left: 20px;
+  margin-top: 17px;
+  width: 586px;
+  height: 32px;
+  background: #F6F6FB;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-family: 'Poppins';
+}
+
+.new-project-text {
+  margin-left: 32px;
+  margin-top: 74px;
+  width: 393px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  /* or 128% */
+
+  letter-spacing: 0.5px;
+
+  color: #1F384C;
 }
