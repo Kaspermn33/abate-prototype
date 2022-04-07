@@ -185,6 +185,40 @@ code {
   margin-right:20px;
 }
 
+.cont-desc-box {
+  display:flex;
+}
+
+.project-name {
+  margin-top: -20px;
+  margin-bottom: 0px;
+  margin-left: 20px;
+}
+
+.p-header {
+  text-decoration: underline;
+  font-family: 'Poppins';
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.p-normal {
+  font-family: 'Poppins';
+  margin: 0px;
+  font-size: 18px;
+}
+
+.contributors-box{
+  margin-left: 20px;
+  width: 300px;
+  margin-top: 0px;
+  
+}
+
+.description-box{
+  margin-left: 61px;
+}
+
 .project {
   padding-left: 20px;
 }
@@ -218,6 +252,7 @@ code {
   height: 316px;
   margin-left: 141px;
   margin-top: 138px;
+  margin-bottom: 0px;
 }
 
 .new-box {

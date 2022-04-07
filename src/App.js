@@ -17,7 +17,7 @@ function App() {
     {
       id: 1,
       name: 'Hindbærkrattet 1',
-      description: 'Placeholder',
+      description: 'Placeholder description',
       lastEdit: 'April 4th',
       contributors: [
         {
@@ -54,7 +54,7 @@ function App() {
     {
       id: 2,
       name: 'Hindbærkrattet 2',
-      description: 'Placeholder',
+      description: 'Placeholder description',
       lastEdit: 'April 4th',
       contributors: [
         {
@@ -65,6 +65,23 @@ function App() {
           id: 2,
           name: 'Rasmus'
         }
+      ],
+      screenings: [
+        {
+          id: 1,
+          name: 'Screening 1',
+          lastEdit: 'April 6th',
+        }
+      ],
+      lca: [
+        {
+          id: 1,
+          name: 'lca 1',
+          lastEdit: 'April 6th',
+        }
+      ],
+      costs: [
+        
       ],
     },
   ]);

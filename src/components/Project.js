@@ -2,7 +2,7 @@ import { FaFolder } from 'react-icons/fa'
 import { useParams } from 'react-router-dom';
 import BoxHeader from './BoxHeader';
 import RecentItem from './RecentItem';
-import {FaRecycle} from 'react-icons/fa'
+import {GrCycle} from 'react-icons/gr'
 
 import Header from './Header'
 const Project = ({ projects }) => {
@@ -47,7 +47,7 @@ const Project = ({ projects }) => {
                   <div>
                     {project.lca.map(lca => (
                       <div> 
-                        <FaRecycle /><RecentItem key={lca.id} item={lca} />
+                        <RecentItem key={lca.id} item={lca} />
                       </div>
                     ))}
                   </div>
@@ -80,7 +80,23 @@ const Project = ({ projects }) => {
               <h2>Manage project</h2>
               <div className='manage-project-box'>
                 <BoxHeader title={"Make changes"} />
+                <div>
+                <h2 className='project-name'>{project.name}</h2>
+                <div className='cont-desc-box'>
+                  <div className='contributors-box'>
+                  <p className='p-header'>Contributors:</p>
+                  {project.contributors.map(cont => (
+                      <p className='p-normal'>{cont.name}</p>
+                    ))}
+                    </div>
+                    <div className='description-box'>
+                    <p className='p-header'>Description</p>
+                    <p className='p-normal'>{project.description}</p>
+                    </div>
+                </div>
               </div>
+              </div>
+              
             </div>
           </div>
         </div>
