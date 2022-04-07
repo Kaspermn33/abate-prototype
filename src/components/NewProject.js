@@ -1,8 +1,35 @@
 import Header from "./Header"
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-enterprise';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const NewProject = () => {
+    const [rowData] = useState([
+        { contributors: 'Spotty Solutionist (You)' }
+    ]);
 
+    const [columnDefs] = useState([
+        {
+            field: 'contributors',
+            cellEditor: 'agRichSelectCellEditor',
+            cellEditorPopup: true,
+            cellEditorParams: {
+                cellHeight: 50,
+                values: ['Kasper Møller', 'Rasmus Albrektsen', 'Spotty Solutionist'],
+            },
+        }
+    ]);
+
+    const defaultColDef = useMemo(() => {
+        return {
+            flex: 1,
+            minWidth: 130,
+            editable: true,
+            resizable: true,
+        };
+    }, []);
 
     return (
         <div>
@@ -23,7 +50,14 @@ const NewProject = () => {
                         </div>
 
                         <div className='new-project-contributors'>
-                            
+                            <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
+                                <AgGridReact
+                                    rowData={rowData}
+                                    columnDefs={columnDefs}
+                                    defaultColDef={defaultColDef}
+                                >
+                                </AgGridReact>
+                            </div>
                         </div>
                     </div>
                     <div className='new-project-right'>

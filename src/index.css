@@ -290,6 +290,8 @@ code {
   
 }
 
+
+
 .new-project-main {
   display: flex;
   text-align: center;
@@ -322,11 +324,11 @@ code {
 }
 
 .new-project-description {
-
+  margin-top: 80px;
 }
 
 .new-project-contributors {
-
+  margin-top: 80px;
 }
 
 .new-project-buildings {
