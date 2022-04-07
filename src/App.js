@@ -11,6 +11,7 @@ import Project from './components/Project';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Dashboard from './components/Dashboard';
+import NewProject from './components/NewProject';
 
 function App() {
   const [projects, setProjects] = useState([
@@ -101,6 +102,7 @@ function App() {
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects}/>} />
           <Route path="/project/:id" element={<Project projects={projects}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
+          <Route path="/newproject" element={<NewProject/>}/>
         </Routes>
       </Router>
     </div>

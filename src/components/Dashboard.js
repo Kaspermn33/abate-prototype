@@ -1,11 +1,16 @@
 import React from 'react'
 import Header from './Header'
 import ProjectItem from './ProjectItem'
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = ({ onUpdate, projects }) => {
-
+  const navigate = useNavigate();
   const onClick = () => {
     onUpdate(true);
+  }
+
+  const newProject = () => {
+    navigate("/newproject");
   }
   //<button onClick={onClick}>Project</button>
 
@@ -28,10 +33,12 @@ const Dashboard = ({ onUpdate, projects }) => {
             </div>
             <div className='box-body'></div>
           </div>
-          <div className='new-project'>
-            <div>
+          <div className='new-project' onClick={newProject}>
+            <div >
               <h2 className='box-header'>New Project</h2>
+              <div>
               <p className='new-project-text'>Create a new empty project with contributors, description and buildings</p>
+              </div>
             </div>
           </div>
         </div>
