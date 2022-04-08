@@ -6,12 +6,12 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const NewProject = () => {
-    const initialData = [{contributors: 'Spotty Solutionist (You)' }];
-    const gridRef = useRef();
+    const initialData1 = [{ contributors: 'Spotty Solutionist (You)' }];
+    const gridRef1 = useRef();
 
-    var [rowData, setRowData] = useState(initialData);
+    var [rowData1, setRowData1] = useState(initialData1);
 
-    const [columnDefs] = useState([
+    const [columnDefs1] = useState([
         {
             field: 'contributors',
             cellEditor: 'agRichSelectCellEditor',
@@ -23,7 +23,7 @@ const NewProject = () => {
         }
     ]);
 
-    const defaultColDef = useMemo(() => {
+    const defaultColDef1 = useMemo(() => {
         return {
             flex: 1,
             minWidth: 130,
@@ -35,30 +35,98 @@ const NewProject = () => {
 
     //This is not the cleanest code I've ever made, but it works
     const addRow = useCallback(() => {
-        const newRowData = [...rowData];
-        newRowData.push({contributors: 'none selected' });
-        setRowData(newRowData);
-        rowData = [...newRowData]
+        const newRowData = [...rowData1];
+        newRowData.push({ contributors: 'none selected' });
+        setRowData1(newRowData);
+        rowData1 = [...newRowData]
     }, []);
 
     //Definitely not that clean either, worked from a multiple row selection implementation
     const deleteRow = useCallback(() => {
-        const selectedRowNodes = gridRef.current.api.getSelectedNodes();
+        const selectedRowNodes = gridRef1.current.api.getSelectedNodes();
 
         const selectedIds = selectedRowNodes.map(function (rowNode) {
             return parseInt(rowNode.id);
         });
 
         var filteredData = [];
-        for (let i = 0; i < rowData.length; i++) {
-            if(selectedIds[0] != i) {
-                filteredData.push(rowData[i]);
+        for (let i = 0; i < rowData1.length; i++) {
+            if (selectedIds[0] != i) {
+                filteredData.push(rowData1[i]);
             }
         }
-        
-        setRowData(filteredData);
-        rowData = [...filteredData]
+
+        setRowData1(filteredData);
+        rowData1 = [...filteredData]
     }, []);
+
+    const initialData2 = [{ 'name': 'Building 1', 'type': 'Apartment' , 'levels': 6, 'area': 6700}];
+    const gridRef2 = useRef();
+
+    var [rowData2, setRowData2] = useState(initialData2);
+
+    const [columnDefs2] = useState([
+        {
+            headerName: 'Building name',
+            field: 'name',
+        },
+        {
+            headerName: 'Building type',
+            field: 'type',
+            cellEditor: 'agRichSelectCellEditor',
+            cellEditorPopup: true,
+            cellEditorParams: {
+                cellHeight: 50,
+                values: ['Detached', 'Apartment', 'Office'],
+            },
+        },
+        {
+            headerName: 'Number of levels',
+            field: 'levels',
+        },
+        {
+            headerName: 'Gross area',
+            field: 'area',
+        },
+
+    ]);
+
+    const defaultColDef2 = useMemo(() => {
+        return {
+            flex: 1,
+            minWidth: 130,
+            editable: true,
+        };
+    }, []);
+
+
+    //This is not the cleanest code I've ever made, but it works
+    const addRow2 = useCallback(() => {
+        const newRowData = [...rowData2];
+        newRowData.push({ 'name': 'Building name', 'type': 'Apartment' , 'levels': 0, 'area': 0});
+        setRowData2(newRowData);
+        rowData2 = [...newRowData]
+    }, []);
+
+    //Definitely not that clean either, worked from a multiple row selection implementation
+    const deleteRow2 = useCallback(() => {
+        const selectedRowNodes = gridRef2.current.api.getSelectedNodes();
+
+        const selectedIds = selectedRowNodes.map(function (rowNode) {
+            return parseInt(rowNode.id);
+        });
+
+        var filteredData = [];
+        for (let i = 0; i < rowData2.length; i++) {
+            if (selectedIds[0] != i) {
+                filteredData.push(rowData2[i]);
+            }
+        }
+
+        setRowData2(filteredData);
+        rowData2 = [...filteredData]
+    }, []);
+
 
     return (
         <div>
@@ -83,10 +151,10 @@ const NewProject = () => {
                             <button onClick={deleteRow}>Remove selected contributor</button>
                             <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
                                 <AgGridReact
-                                    ref={gridRef}
-                                    rowData={rowData}
-                                    columnDefs={columnDefs}
-                                    defaultColDef={defaultColDef}
+                                    ref={gridRef1}
+                                    rowData={rowData1}
+                                    columnDefs={columnDefs1}
+                                    defaultColDef={defaultColDef1}
                                     rowSelection={'single'}
                                 >
                                 </AgGridReact>
@@ -95,7 +163,25 @@ const NewProject = () => {
                     </div>
                     <div className='new-project-right'>
                         <div className='new-project-buildings'>
+                            <div>
                             <h3>Buildings</h3>
+                            <button onClick={addRow2}>Add row</button>
+                            <button onClick={deleteRow2}>Remove selected row</button>
+                            </div>
+                            <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
+                                <AgGridReact
+                                    ref={gridRef2}
+                                    rowData={rowData2}
+                                    columnDefs={columnDefs2}
+                                    defaultColDef={defaultColDef2}
+                                    rowSelection={'single'}
+                                >
+                                </AgGridReact>
+                            </div>
+                            <div>
+                                <button>Create project</button>
+                                <button>Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
