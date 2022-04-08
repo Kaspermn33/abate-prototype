@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = ({ onUpdate, projects }) => {
   const navigate = useNavigate();
   const onClick = () => {
-    onUpdate(true);
+    //onUpdate(true);
   }
 
   const newProject = () => {

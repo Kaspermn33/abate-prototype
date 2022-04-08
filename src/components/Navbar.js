@@ -6,7 +6,7 @@ import './Navbar.scss'
 const Navbar = (projectSelected, onUpdate) => {
 
 
-
+    //NOT THE PROPER WAY
     const screenings = [
         {
             id: 1,
@@ -29,7 +29,7 @@ const Navbar = (projectSelected, onUpdate) => {
             {projectSelected.projectSelected ?
                 <Menu iconShape="square">
                     <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" onClick={() => onUpdate(false)} /></MenuItem>
-                    <MenuItem icon={<FaGem />}>Project <Link to={"/project/"} /></MenuItem>
+                    <MenuItem icon={<FaGem />}>Project <Link to="/project/" /></MenuItem>
                     <SubMenu title="Screening" icon={<FaHeart />}>
                         {screenings.map(screening => (
                             <MenuItem>{screening.name} <Link to={"/screening/" + screening.id.toString()} /> </MenuItem>

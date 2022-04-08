@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { useNavigate } from "react-router-dom";
 
-const NewProject = (projects) => {
+const NewProject = ({projects, onAddProject}) => {
     const initialData1 = [{ contributors: 'Spotty Solutionist (You)' }];
     const gridRef1 = useRef();
 
@@ -133,8 +133,8 @@ const NewProject = (projects) => {
 
     const navigate = useNavigate();
     const createProject = () => {
-        console.log(projects.projects.length)
-        var newId = checkID(projects.projects.length);
+        console.log(projects.length)
+        var newId = checkID(projects.length);
 
         
 
@@ -152,14 +152,17 @@ const NewProject = (projects) => {
             costs: [],
           }
 
-        projects.projects.push(newProject);
+          
+        //projects.push(newProject);
+
+        onAddProject(newProject)
 
         navigate("/project/"+newId);
     }
 
     const checkID = (id) => {
-        for(let i = 0; i < projects.projects.length; i++){
-            if(id == projects.projects[i]) {
+        for(let i = 0; i < projects.length; i++){
+            if(id == projects[i]) {
                 return checkID(id++)
             }
         }

@@ -87,11 +87,20 @@ function App() {
     },
   ]);
 
+
   const [projectSelected, setProjectSelected] = useState(false);
 
   const onSetProjectSelected = (b) => {
     console.log("should update")
     setProjectSelected(b);
+  }
+
+  const addProject = (newProject) => {
+    
+    console.log(newProject)
+    var newProjects = [...projects];
+    newProjects.push(newProject);
+    setProjects(newProjects);
   }
 
   return (
@@ -102,7 +111,7 @@ function App() {
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects}/>} />
           <Route path="/project/:id" element={<Project projects={projects}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
-          <Route path="/newproject" element={<NewProject projects={projects}/>}/>
+          <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
         </Routes>
       </Router>
     </div>
