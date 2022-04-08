@@ -16,67 +16,67 @@ import NewProject from './components/NewProject';
 function App() {
   const [projects, setProjects] = useState([
     {
-      id: 1,
+      id: 0,
       name: 'Hindbærkrattet 1',
       description: 'Placeholder description',
       lastEdit: 'April 4th',
       contributors: [
         {
-          id: 1,
+          id: 0,
           name: 'Kasper'
         },
         {
-          id: 2,
+          id: 1,
           name: 'Rasmus'
         }
       ],
       screenings: [
         {
-          id: 1,
+          id: 0,
           name: 'Screening 1',
           lastEdit: 'April 6th',
         }
       ],
       lca: [
         {
-          id: 1,
+          id: 0,
           name: 'lca 1',
           lastEdit: 'April 6th',
         }
       ],
       costs: [
         {
-          id: 1,
+          id: 0,
           name: 'cost 1',
           lastEdit: 'April 6th',
         }
       ],
     },
     {
-      id: 2,
+      id: 1,
       name: 'Hindbærkrattet 2',
       description: 'Placeholder description',
       lastEdit: 'April 4th',
       contributors: [
         {
-          id: 1,
+          id: 0,
           name: 'Kasper'
         },
         {
-          id: 2,
+          id: 1,
           name: 'Rasmus'
         }
       ],
       screenings: [
         {
-          id: 1,
+          id: 0,
           name: 'Screening 1',
           lastEdit: 'April 6th',
         }
       ],
       lca: [
         {
-          id: 1,
+          id: 0,
           name: 'lca 1',
           lastEdit: 'April 6th',
         }
@@ -102,7 +102,7 @@ function App() {
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects}/>} />
           <Route path="/project/:id" element={<Project projects={projects}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
-          <Route path="/newproject" element={<NewProject/>}/>
+          <Route path="/newproject" element={<NewProject projects={projects}/>}/>
         </Routes>
       </Router>
     </div>

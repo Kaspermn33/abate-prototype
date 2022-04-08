@@ -4,8 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { useNavigate } from "react-router-dom";
 
-const NewProject = () => {
+const NewProject = (projects) => {
     const initialData1 = [{ contributors: 'Spotty Solutionist (You)' }];
     const gridRef1 = useRef();
 
@@ -60,7 +61,7 @@ const NewProject = () => {
         rowData1 = [...filteredData]
     }, []);
 
-    const initialData2 = [{ 'name': 'Building 1', 'type': 'Apartment' , 'levels': 6, 'area': 6700}];
+    const initialData2 = [{ 'name': 'Building name', 'type': '' , 'levels': 0, 'area': 0}];
     const gridRef2 = useRef();
 
     var [rowData2, setRowData2] = useState(initialData2);
@@ -127,6 +128,48 @@ const NewProject = () => {
         rowData2 = [...filteredData]
     }, []);
 
+    const [projectName, setProjectName] = useState("");
+    const [projectDescription, setprojectDescription] = useState("");
+
+    const navigate = useNavigate();
+    const createProject = () => {
+        console.log(projects.projects.length)
+        var newId = checkID(projects.projects.length);
+
+        
+
+        var today = new Date();
+        
+        const newProject = {
+            id: newId,
+            name: projectName,
+            description: projectDescription,
+            lastEdit: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
+            contributors: rowData1
+            ,
+            screenings: [],
+            lca: [],
+            costs: [],
+          }
+
+        projects.projects.push(newProject);
+
+        navigate("/project/"+newId);
+    }
+
+    const checkID = (id) => {
+        for(let i = 0; i < projects.projects.length; i++){
+            if(id == projects.projects[i]) {
+                return checkID(id++)
+            }
+        }
+        return id;
+    }
+
+    const cancel = () => {
+        navigate("/");
+    }
+
 
     return (
         <div>
@@ -139,11 +182,11 @@ const NewProject = () => {
                     <div className='new-project-left'>
                         <div className='new-project-name'>
                             <h3>Project Name</h3>
-                            <input className='input-project-name' type='text' placeholder='Project name' />
+                            <input value={projectName} onChange={(e) => setProjectName(e.target.value)} className='input-project-name' type='text' placeholder='Project name' />
                         </div>
                         <div className='new-project-description'>
                             <h3>Description</h3>
-                            <input className='input-project-description' type='text' placeholder='Project description' />
+                            <input value={projectDescription} onChange={(e) => setprojectDescription(e.target.value)} className='input-project-description' type='text' placeholder='Project description' />
                         </div>
 
                         <div className='new-project-contributors'>
@@ -179,8 +222,8 @@ const NewProject = () => {
                                 </AgGridReact>
                             </div>
                             <div>
-                                <button>Create project</button>
-                                <button>Cancel</button>
+                                <button onClick={createProject}>Create project</button>
+                                <button onClick={cancel}>Cancel</button>
                             </div>
                         </div>
                     </div>
