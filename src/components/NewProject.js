@@ -1,5 +1,5 @@
 import Header from "./Header"
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -7,7 +7,8 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const NewProject = () => {
     const initialData = [{contributors: 'Spotty Solutionist (You)' }];
-    
+    const gridRef = useRef();
+
     var [rowData, setRowData] = useState(initialData);
 
     const [columnDefs] = useState([
@@ -35,9 +36,28 @@ const NewProject = () => {
     //This is not the cleanest code I've ever made, but it works
     const addRow = useCallback(() => {
         const newRowData = [...rowData];
-        newRowData.push({contributors: 'none selected'});
+        newRowData.push({contributors: 'none selected' });
         setRowData(newRowData);
         rowData = [...newRowData]
+    }, []);
+
+    //Definitely not that clean either, worked from a multiple row selection implementation
+    const deleteRow = useCallback(() => {
+        const selectedRowNodes = gridRef.current.api.getSelectedNodes();
+
+        const selectedIds = selectedRowNodes.map(function (rowNode) {
+            return parseInt(rowNode.id);
+        });
+
+        var filteredData = [];
+        for (let i = 0; i < rowData.length; i++) {
+            if(selectedIds[0] != i) {
+                filteredData.push(rowData[i]);
+            }
+        }
+        
+        setRowData(filteredData);
+        rowData = [...filteredData]
     }, []);
 
     return (
@@ -60,11 +80,14 @@ const NewProject = () => {
 
                         <div className='new-project-contributors'>
                             <button onClick={addRow}>Add contributor</button>
+                            <button onClick={deleteRow}>Remove selected contributor</button>
                             <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
                                 <AgGridReact
+                                    ref={gridRef}
                                     rowData={rowData}
                                     columnDefs={columnDefs}
                                     defaultColDef={defaultColDef}
+                                    rowSelection={'single'}
                                 >
                                 </AgGridReact>
                             </div>
