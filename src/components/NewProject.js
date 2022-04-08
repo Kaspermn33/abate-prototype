@@ -1,14 +1,14 @@
 import Header from "./Header"
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 const NewProject = () => {
-    const [rowData] = useState([
-        { contributors: 'Spotty Solutionist (You)' }
-    ]);
+    const initialData = [{contributors: 'Spotty Solutionist (You)' }];
+    
+    var [rowData, setRowData] = useState(initialData);
 
     const [columnDefs] = useState([
         {
@@ -31,6 +31,15 @@ const NewProject = () => {
         };
     }, []);
 
+
+    //This is not the cleanest code I've ever made, but it works
+    const addRow = useCallback(() => {
+        const newRowData = [...rowData];
+        newRowData.push({contributors: 'none selected'});
+        setRowData(newRowData);
+        rowData = [...newRowData]
+    }, []);
+
     return (
         <div>
             <Header title={'Header palceholder'} />
@@ -50,6 +59,7 @@ const NewProject = () => {
                         </div>
 
                         <div className='new-project-contributors'>
+                            <button onClick={addRow}>Add contributor</button>
                             <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
                                 <AgGridReact
                                     rowData={rowData}
