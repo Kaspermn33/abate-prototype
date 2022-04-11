@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { useNavigate } from "react-router-dom";
 
-const NewProject = ({projects, onAddProject}) => {
+const NewProject = ({ projects, onAddProject }) => {
     const initialData1 = [{ contributors: 'Spotty Solutionist (You)' }];
     const gridRef1 = useRef();
 
@@ -61,7 +61,7 @@ const NewProject = ({projects, onAddProject}) => {
         rowData1 = [...filteredData]
     }, []);
 
-    const initialData2 = [{ 'name': 'Building name', 'type': '' , 'levels': 0, 'area': 0}];
+    const initialData2 = [{ 'name': 'Building name', 'type': '', 'levels': 0, 'area': 0 }];
     const gridRef2 = useRef();
 
     var [rowData2, setRowData2] = useState(initialData2);
@@ -104,7 +104,7 @@ const NewProject = ({projects, onAddProject}) => {
     //This is not the cleanest code I've ever made, but it works
     const addRow2 = useCallback(() => {
         const newRowData = [...rowData2];
-        newRowData.push({ 'name': 'Building name', 'type': 'Apartment' , 'levels': 0, 'area': 0});
+        newRowData.push({ 'name': 'Building name', 'type': 'Apartment', 'levels': 0, 'area': 0 });
         setRowData2(newRowData);
         rowData2 = [...newRowData]
     }, []);
@@ -136,33 +136,33 @@ const NewProject = ({projects, onAddProject}) => {
         console.log(projects.length)
         var newId = checkID(projects.length);
 
-        
+
 
         var today = new Date();
-        
+
         const newProject = {
             id: newId,
             name: projectName,
             description: projectDescription,
-            lastEdit: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
+            lastEdit: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
             contributors: rowData1
             ,
             screenings: [],
             lca: [],
             costs: [],
-          }
+        }
 
-          
+
         //projects.push(newProject);
 
         onAddProject(newProject)
 
-        navigate("/project/"+newId);
+        navigate("/project/" + newId);
     }
 
     const checkID = (id) => {
-        for(let i = 0; i < projects.length; i++){
-            if(id == projects[i]) {
+        for (let i = 0; i < projects.length; i++) {
+            if (id == projects[i]) {
                 return checkID(id++)
             }
         }
@@ -210,9 +210,9 @@ const NewProject = ({projects, onAddProject}) => {
                     <div className='new-project-right'>
                         <div className='new-project-buildings'>
                             <div>
-                            <h3>Buildings</h3>
-                            <button onClick={addRow2}>Add row</button>
-                            <button onClick={deleteRow2}>Remove selected row</button>
+                                <h3>Buildings</h3>
+                                <button onClick={addRow2}>Add building</button>
+                                <button onClick={deleteRow2}>Remove selected building</button>
                             </div>
                             <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
                                 <AgGridReact
@@ -224,9 +224,13 @@ const NewProject = ({projects, onAddProject}) => {
                                 >
                                 </AgGridReact>
                             </div>
-                            <div>
-                                <button onClick={createProject}>Create project</button>
-                                <button onClick={cancel}>Cancel</button>
+                            <div className='creation-buttons'>
+                                <div>
+                                    <button className='project-create-button' onClick={createProject}>Create project</button>
+                                </div>
+                                <div>
+                                    <button className='cancel-button' onClick={cancel}>Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>

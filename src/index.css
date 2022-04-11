@@ -301,6 +301,10 @@ code {
   margin-left: 132px;
 }
 
+.new-project-right {
+  display: flex;
+}
+
 .input-project-name {
   background: rgba(255, 255, 255, 0.44);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -332,5 +336,31 @@ code {
 }
 
 .new-project-buildings {
+  display: block;
   margin-left: 84px;
+}
+
+.creation-buttons {
+  margin-top: 300px;
+  display: block;
+}
+
+.project-create-button {
+  font-size: 24px;
+  font-family: 'Poppins';
+  color: white;
+  width: 283px;
+  height: 66px;
+  background: #1858A8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.cancel-button {
+  margin-top: 20px;
+  width: 101px;
+  height: 36px;
+  background: #F1F2F7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }
