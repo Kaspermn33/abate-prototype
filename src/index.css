@@ -29,17 +29,37 @@ code {
   height: 87px;
   line-height: 80px;
   position: aboslute;
+}
+
+.header-title {
   padding-left: 20px;
 }
 
+.main-body {
+  width: 100%;
+  margin-left: 0px;
+}
+
 .header-separator {
-  width: 1920px;
+  width: 100%;
   align-content: left;
+  position: absolute;
+  left: 0px;
+  top: 77px;
+  border: 0px;
+  border-top: 1px solid #ccc;
+}
+
+.logo-container {
+  height: 88px;
+  background-color: #F1F2F7;
 }
 
 .user {
-  text-align: right;
+  justify-content:flex-end;
   font-family: 'Poppins';
+  text-align: right;
+  margin-left: -20px;
 }
 
 .dashboard {

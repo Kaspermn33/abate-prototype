@@ -32,7 +32,7 @@ const Dashboard = ({ onUpdate, projects }) => {
   }
 
   return (
-    <div>
+    <div className='main-body'>
       <Header title={'Dashboard'} />
       <div className='search-body'>
         <input value={searchString} onChange={(e) => filterProjects(e.target.value)} className='search-projects' type='text' placeholder='Search your projects' />

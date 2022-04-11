@@ -177,7 +177,7 @@ const NewProject = ({ projects, onAddProject }) => {
 
 
     return (
-        <div>
+        <div className='main-body'>
             <Header title={'Header palceholder'} />
             <div className='newproject'>
                 <div>

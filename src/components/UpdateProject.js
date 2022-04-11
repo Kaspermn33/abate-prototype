@@ -185,7 +185,7 @@ const UpdateProject = ({projects, onUpdateProject}) => {
     }
 
   return (
-    <div>
+    <div className='main-body'>
     <Header title={'Header palceholder'} />
     <div className='newproject'>
         <div>

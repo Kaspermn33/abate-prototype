@@ -18,7 +18,7 @@ const Project = ({ projects }) => {
 
 
   return (
-    <div>
+    <div className='main-body'>
       <Header title={project.name} />
       <div className='project'>
         <div>

@@ -3,6 +3,8 @@ import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { FaGem, FaHeart } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import './Navbar.scss'
+import Header from './Header';
+import Logo from './Logo';
 const Navbar = (projectSelected, onUpdate) => {
 
 
@@ -21,10 +23,10 @@ const Navbar = (projectSelected, onUpdate) => {
     console.log(projectSelected)
 
     return (
+        <div>
+            <Logo/>
         <ProSidebar>
-            <SidebarHeader>
-                {<h1>LOGO ABATE</h1>}
-            </SidebarHeader>
+
             <p>MENU</p>
                 <Menu iconShape="square">
                     <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" /></MenuItem>
@@ -53,7 +55,7 @@ const Navbar = (projectSelected, onUpdate) => {
             <SidebarFooter>
                 {<p>Copyright</p>}
             </SidebarFooter>
-        </ProSidebar>
+        </ProSidebar></div>
     )
 }
 
