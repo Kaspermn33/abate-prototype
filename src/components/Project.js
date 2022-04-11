@@ -3,11 +3,20 @@ import { useParams } from 'react-router-dom';
 import BoxHeader from './BoxHeader';
 import RecentItem from './RecentItem';
 import {GrCycle} from 'react-icons/gr'
+import { useNavigate, generatePath } from "react-router-dom";
 
 import Header from './Header'
 const Project = ({ projects }) => {
   const { id } = useParams()
   const project = projects.find(project => project.id == id)
+
+  const navigate = useNavigate();
+  const onUpdateProject = () => {
+    navigate(generatePath('update', { id: project.id }));
+      
+  }
+
+
   return (
     <div>
       <Header title={project.name} />
@@ -78,7 +87,7 @@ const Project = ({ projects }) => {
             </div>
             <div className='manageproject-box'>
               <h2>Manage project</h2>
-              <div className='manage-project-box'>
+              <div className='manage-project-box' onClick={onUpdateProject}>
                 <BoxHeader title={"Make changes"} />
                 <div>
                 <h2 className='project-name'>{project.name}</h2>

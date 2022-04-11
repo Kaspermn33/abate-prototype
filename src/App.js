@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Dashboard from './components/Dashboard';
 import NewProject from './components/NewProject';
+import UpdateProject from './components/UpdateProject';
 
 function App() {
   const [projects, setProjects] = useState([
@@ -51,6 +52,15 @@ function App() {
           lastEdit: 'April 6th',
         }
       ],
+      buildings: [
+        {
+          id: 0,
+          name: 'bygning 1',
+          type: 'Apartment',
+          levels: 5,
+          area: 2600,
+        }
+      ]
     },
     {
       id: 1,
@@ -84,6 +94,15 @@ function App() {
       costs: [
         
       ],
+      buildings: [
+        {
+          id: 0,
+          name: 'bygning 1',
+          type: 'Apartment',
+          levels: 5,
+          area: 2600,
+        }
+      ]
     },
   ]);
 
@@ -103,6 +122,24 @@ function App() {
     setProjects(newProjects);
   }
 
+  const updateProject = (updatedProject) => {
+    var temp = [...projects]
+    console.log(temp)
+    const newProjects = [];
+    for(let i = 0; i < temp.length; i++) {
+      let p = temp[i]
+      if(p.id != updatedProject.id) {
+        newProjects.push(temp[i]);
+      } else {
+        console.log(true)
+        newProjects.push(updatedProject);
+      }
+    }
+    setProjects(newProjects)
+
+    console.log(newProjects)
+  }
+
   return (
     <div className='app'>
       <Router>
@@ -112,6 +149,7 @@ function App() {
           <Route path="/project/:id" element={<Project projects={projects}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
+          <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
         </Routes>
       </Router>
     </div>

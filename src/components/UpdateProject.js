@@ -1,13 +1,22 @@
 import Header from "./Header"
 import React, { useState, useMemo, useCallback, useRef } from "react";
+import { useParams } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { useNavigate } from "react-router-dom";
 
-const NewProject = ({ projects, onAddProject }) => {
-    const initialData1 = [{ name: 'Spotty Solutionist (You)' }];
+const UpdateProject = ({projects, onUpdateProject}) => {
+    const { id } = useParams()
+    const project = projects.find(project => project.id == id)
+    console.log(project)
+    const initialData1 = [];
+    for(let i = 0; i < project.contributors.length; i++) {
+        console.log(project.contributors[i].name)
+        var rowData = {name: project.contributors[i].name}
+        initialData1.push(rowData)
+    }
     const gridRef1 = useRef();
 
     var [rowData1, setRowData1] = useState(initialData1);
@@ -62,7 +71,15 @@ const NewProject = ({ projects, onAddProject }) => {
         rowData1 = [...filteredData]
     }, []);
 
-    const initialData2 = [{ 'name': 'Building name', 'type': '', 'levels': 0, 'area': 0 }];
+    const initialData2 = [];
+
+    for(let i = 0; i < project.buildings.length; i++) {
+        var building = project.buildings[i];
+        console.log(building)
+        var rowData = {name: building.name, type: building.type, levels: building.levels, area: building.area}
+        initialData2.push(rowData)
+    }
+
     const gridRef2 = useRef();
 
     var [rowData2, setRowData2] = useState(initialData2);
@@ -129,20 +146,15 @@ const NewProject = ({ projects, onAddProject }) => {
         rowData2 = [...filteredData]
     }, []);
 
-    const [projectName, setProjectName] = useState("");
-    const [projectDescription, setprojectDescription] = useState("");
+    const [projectName, setProjectName] = useState(project.name);
+    const [projectDescription, setprojectDescription] = useState(project.description);
 
     const navigate = useNavigate();
-    const createProject = () => {
-        console.log(projects.length)
-        var newId = checkID(projects.length);
-
-
-
+    const updateProject = () => {
         var today = new Date();
 
         const newProject = {
-            id: newId,
+            id: project.id,
             name: projectName,
             description: projectDescription,
             lastEdit: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
@@ -154,12 +166,9 @@ const NewProject = ({ projects, onAddProject }) => {
             buildings: rowData2
         }
 
+        onUpdateProject(newProject)
 
-        //projects.push(newProject);
-
-        onAddProject(newProject)
-
-        navigate("/project/" + newId);
+        navigate("/project/" + project.id);
     }
 
     const checkID = (id) => {
@@ -175,71 +184,70 @@ const NewProject = ({ projects, onAddProject }) => {
         navigate("/");
     }
 
-
-    return (
+  return (
+    <div>
+    <Header title={'Header palceholder'} />
+    <div className='newproject'>
         <div>
-            <Header title={'Header palceholder'} />
-            <div className='newproject'>
-                <div>
-                    <h1>Project creation</h1>
+            <h1>Manage project</h1>
+        </div>
+        <div className='new-project-main'>
+            <div className='new-project-left'>
+                <div className='new-project-name'>
+                    <h3>Project Name</h3>
+                    <input value={projectName} onChange={(e) => setProjectName(e.target.value)} className='input-project-name' type='text' placeholder='Project name' />
                 </div>
-                <div className='new-project-main'>
-                    <div className='new-project-left'>
-                        <div className='new-project-name'>
-                            <h3>Project Name</h3>
-                            <input value={projectName} onChange={(e) => setProjectName(e.target.value)} className='input-project-name' type='text' placeholder='Project name' />
-                        </div>
-                        <div className='new-project-description'>
-                            <h3>Description</h3>
-                            <input value={projectDescription} onChange={(e) => setprojectDescription(e.target.value)} className='input-project-description' type='text' placeholder='Project description' />
-                        </div>
+                <div className='new-project-description'>
+                    <h3>Description</h3>
+                    <input value={projectDescription} onChange={(e) => setprojectDescription(e.target.value)} className='input-project-description' type='text' placeholder='Project description' />
+                </div>
 
-                        <div className='new-project-contributors'>
-                            <button onClick={addRow}>Add contributor</button>
-                            <button onClick={deleteRow}>Remove selected contributor</button>
-                            <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
-                                <AgGridReact
-                                    ref={gridRef1}
-                                    rowData={rowData1}
-                                    columnDefs={columnDefs1}
-                                    defaultColDef={defaultColDef1}
-                                    rowSelection={'single'}
-                                >
-                                </AgGridReact>
-                            </div>
-                        </div>
+                <div className='new-project-contributors'>
+                    <button onClick={addRow}>Add contributor</button>
+                    <button onClick={deleteRow}>Remove selected contributor</button>
+                    <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
+                        <AgGridReact
+                            ref={gridRef1}
+                            rowData={rowData1}
+                            columnDefs={columnDefs1}
+                            defaultColDef={defaultColDef1}
+                            rowSelection={'single'}
+                        >
+                        </AgGridReact>
                     </div>
-                    <div className='new-project-right'>
-                        <div className='new-project-buildings'>
-                            <div>
-                                <h3>Buildings</h3>
-                                <button onClick={addRow2}>Add building</button>
-                                <button onClick={deleteRow2}>Remove selected building</button>
-                            </div>
-                            <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
-                                <AgGridReact
-                                    ref={gridRef2}
-                                    rowData={rowData2}
-                                    columnDefs={columnDefs2}
-                                    defaultColDef={defaultColDef2}
-                                    rowSelection={'single'}
-                                >
-                                </AgGridReact>
-                            </div>
-                            <div className='creation-buttons'>
-                                <div>
-                                    <button className='project-create-button' onClick={createProject}>Create project</button>
-                                </div>
-                                <div>
-                                    <button className='cancel-button' onClick={cancel}>Cancel</button>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div className='new-project-right'>
+                <div className='new-project-buildings'>
+                    <div>
+                        <h3>Buildings</h3>
+                        <button onClick={addRow2}>Add building</button>
+                        <button onClick={deleteRow2}>Remove selected building</button>
+                    </div>
+                    <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
+                        <AgGridReact
+                            ref={gridRef2}
+                            rowData={rowData2}
+                            columnDefs={columnDefs2}
+                            defaultColDef={defaultColDef2}
+                            rowSelection={'single'}
+                        >
+                        </AgGridReact>
+                    </div>
+                    <div className='creation-buttons'>
+                        <div>
+                            <button className='project-create-button' onClick={updateProject}>Save changes</button>
+                        </div>
+                        <div>
+                            <button className='cancel-button' onClick={cancel}>Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    </div>
+</div>
+  )
 }
 
-export default NewProject
+export default UpdateProject
