@@ -20,7 +20,6 @@ const ProjectItem = ({ project, onUpdate, recent }) => {
             ? <h3 onClick={onClick}> <FaFolder/>{project.name}</h3>
             : <h3 onClick={onClick}> <FaFolder/>{project.name} Last worked on {project.lastEdit}</h3>
             }
-
         </div>
     )
 }
