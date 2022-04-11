@@ -26,9 +26,8 @@ const Navbar = (projectSelected, onUpdate) => {
                 {<h1>LOGO ABATE</h1>}
             </SidebarHeader>
             <p>MENU</p>
-            {projectSelected.projectSelected ?
                 <Menu iconShape="square">
-                    <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" onClick={() => onUpdate(false)} /></MenuItem>
+                    <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" /></MenuItem>
                     <MenuItem icon={<FaGem />}>Project <Link to="/project/" /></MenuItem>
                     <SubMenu title="Screening" icon={<FaHeart />}>
                         {screenings.map(screening => (
@@ -44,11 +43,6 @@ const Navbar = (projectSelected, onUpdate) => {
                         <MenuItem>Component 2</MenuItem>
                     </SubMenu>
                 </Menu>
-                :
-                <Menu iconShape="square">
-                    <MenuItem icon={<FaGem />}>Dashboard <Link to="/" /></MenuItem>
-                </Menu>
-            }
             <p>OTHERS</p>
             <Menu iconShape="square">
                 <MenuItem icon={<FaGem />}>Settings <Link to="/" /></MenuItem>
