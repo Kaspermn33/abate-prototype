@@ -17,8 +17,8 @@ const ProjectItem = ({ project, onUpdate, recent }) => {
     return (
         <div className='project-item'> 
             {!recent 
-            ? <h3 onClick={onClick}> <FaFolder/>{project.name}</h3>
-            : <h3 onClick={onClick}> <FaFolder/>{project.name} Last worked on {project.lastEdit}</h3>
+            ? <div className='project-item-container' onClick={onClick}><FaFolder className='project-item-icon'/> <h3 className='project-item-text' > {project.name}</h3></div>
+            : <div className='project-item-container' onClick={onClick}><FaFolder className='project-item-icon'/> <h3 className='project-item-text' > {project.name} Last worked on {project.lastEdit}</h3></div>
             }
         </div>
     )

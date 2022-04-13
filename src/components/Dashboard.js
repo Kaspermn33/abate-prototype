@@ -43,7 +43,7 @@ const Dashboard = ({ onUpdate, projects }) => {
             <div className='recent-projects'>
               <div>
                 <h2 className='box-header'>Recent Projects</h2>
-                <div>
+                <div className='projects-body'>
                   {projects.map(project => (
                     <ProjectItem key={project.id} project={project} onUpdate={onUpdate} recent={true} />
                   ))}
@@ -64,7 +64,7 @@ const Dashboard = ({ onUpdate, projects }) => {
             <div>
               <h2 className='box-header'>Your Projects</h2>
             </div>
-            <div>
+            <div className='projects-body'>
               {projects.map(project => (
                 <ProjectItem key={project.id} project={project} onUpdate={onUpdate} />
               ))}

@@ -126,6 +126,10 @@ code {
   border-radius: 6px;
 }
 
+.projects-body {
+  margin-top: -10px;
+}
+
 .box-header {
   font-size: 32px;
   font-family: 'Poppins';
@@ -160,8 +164,25 @@ code {
 .project-item {
   padding-left: 20px;
   margin-top: 5x;
-  line-height: 30px;
+  line-height: 0px;
   font-family: 'Poppins';
+}
+
+.project-item-container {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.project-item-text {
+  padding-left: 10px;
+  padding-top: 0px;
+  margin-top: 15px;
+}
+
+.project-item-icon {
+  padding-top: 7px;
 }
 
 
