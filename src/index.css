@@ -31,6 +31,18 @@ code {
   position: aboslute;
 }
 
+.logo-image {
+  width: 40px;
+  height: 40px;
+  margin-left: 24px;
+  margin-top: 24px;
+}
+
+.logo-text {
+  padding-left: 20px;
+  width: 150px;
+}
+
 .header-title {
   padding-left: 20px;
 }
@@ -53,6 +65,7 @@ code {
 .logo-container {
   height: 88px;
   background-color: #F1F2F7;
+  display: flex;
 }
 
 .user {
