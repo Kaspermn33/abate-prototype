@@ -19,11 +19,6 @@ const Costs = ({ projects }) => {
 
     const onUploadFile = () => {
         let temp = {id: costid, name: costs.name, lastEdit: costs.lastEdit, files: costs.files}
-
-        /*for(let i = 0; i < costs.files.length; i++) {
-            let currentFile = costs.files[i];
-            temp.files.push(currentFile)
-        }*/
         temp.files.push({id: costs.files.length, name: 'hindbærkræt-materials' + costs.files.length + '.csv'})
         setCosts(temp);
     }
