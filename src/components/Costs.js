@@ -3,12 +3,35 @@ import { RiFileUploadLine } from 'react-icons/ri'
 import Header from './Header'
 import { useParams } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
+import BPPic from './building-part.png'
+import MatPic from './material-price.png'
 
 const Costs = ({ projects }) => {
     const { id, costid } = useParams()
     const project = projects.find(project => project.id == id)
-    const costs = project.costs.find(cost => cost.id == costid)
+    const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
+    const [buildingId, setBuilding] = useState(costs.buildingId);
 
+    const updateSelectedBuilding = (e) => {
+        setBuilding(e);
+        costs.buildingId = e;
+    }
+
+    const onUploadFile = () => {
+        let temp = {id: costid, name: costs.name, lastEdit: costs.lastEdit, files: costs.files}
+
+        /*for(let i = 0; i < costs.files.length; i++) {
+            let currentFile = costs.files[i];
+            temp.files.push(currentFile)
+        }*/
+        temp.files.push({id: costs.files.length, name: 'hindbærkræt-materials' + costs.files.length + '.csv'})
+        setCosts(temp);
+    }
+
+
+
+
+    console.log(buildingId)
     const gridRef = useRef();
     const defaultColDef = useMemo(() => {
         return {
@@ -18,6 +41,7 @@ const Costs = ({ projects }) => {
             resizable: true,
         };
     }, []);
+    
     const [columnDefs] = useState([
         {
             headerName: 'Part id',
@@ -52,25 +76,28 @@ const Costs = ({ projects }) => {
     const rowData = [{ part_id: "asdasdas", build_part: 'Roof', mat_name: "Mat name", db: "Molio", mat_id: "IDIDID", quantity: "1.455", unit: "M3" }]
 
     console.log(costs)
+
+
+
     return (
         <div>
             <Header title={project.name} />
             <div className='costs'>
                 <div className='costs-header'>
                     <h1>{costs.name}</h1> 
-                    <select className='building-select'>
+                    <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
                         {project.buildings.map(building => (
-                            <option>{building.name}</option>
+                            <option value={building.id}>{building.name}</option>
                         ))}
                     </select>
                 </div>
                 <div className='costs-body'>
                     <div className='costs-files-container'>
                         <div className='costs-files-header'>
-                            <p className='costs-files-header-text'>Files uploaded:</p> <RiFileUploadLine className='upload-file-icon' /></div>
+                            <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
                         <div className='costs-files'>
-                            {costs.files.map(cost => (
-                                <p>{cost.name}</p>
+                            {costs.files.map(file => (
+                                <p className='costs-file'>{file.name}</p>
                             ))}
                         </div>
                     </div>
@@ -91,11 +118,13 @@ const Costs = ({ projects }) => {
                         </div>
                         <div className='costs-dist-building-parts'>
                             <p className='graph-header'>Cost distribution for building parts</p>
-
+                            <img className='graph-image' src={BPPic} />
+                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>    
                         </div>
                         <div className='costs-dist-materials'>
                             <p className='graph-header'>Cost distribution for materials</p>
-
+                            <img className='graph-image' src={MatPic} />
+                            <p className='price-excl-vat-text'>price in dkk excl. vat</p> 
                         </div>
                     </div>
                     <div className='costs-materials'>

@@ -50,15 +50,15 @@ function App() {
           id: 0,
           name: 'cost 1',
           lastEdit: 'April 6th',
-          buildingId: 0, 
+          buildingId: 1, 
           files: [
             {
               id: 0,
-              name: 'hindbærkræt-materials1.csv'
+              name: 'hindbærkræt-materials.csv'
             },
             {
               id: 1,
-              name: 'hindbærkræt-materials2.csv'
+              name: 'hindbærkræt-materials1.csv'
             },
           ]
         }
@@ -158,6 +158,10 @@ function App() {
     console.log(newProjects)
   }
 
+  const updateCost = (updatedCost, projectId, costId) => {
+    
+  }
+
   return (
     <div className='app'>
       <Router>
@@ -168,7 +172,7 @@ function App() {
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
-          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects}/>}/>
+          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onUpdateCost={updateCost}/>}/>
         </Routes>
       </Router>
     </div>
