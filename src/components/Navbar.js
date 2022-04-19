@@ -35,7 +35,7 @@ const Navbar = (projectSelected, onUpdate) => {
                         {screenings.map(screening => (
                             <MenuItem>{screening.name} <Link to={"/screening/" + screening.id.toString()} /> </MenuItem>
                         ))}
-                    </SubMenu>
+                    </SubMenu >
                     <SubMenu title="Cost" icon={<FaHeart />}>
                         <MenuItem>Component 1<Link to="/projects" /></MenuItem>
                         <MenuItem>Component 2</MenuItem>

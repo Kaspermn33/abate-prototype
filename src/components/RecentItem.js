@@ -1,8 +1,28 @@
+import { useNavigate, generatePath } from "react-router-dom";
 
+const RecentItem = ({type, item }) => {
+  const navigate = useNavigate();
+  const onClick = () => {
+    
+    
 
-const RecentItem = ({item}) => {
+    switch (type){
+      case 'lca':
+        console.log("LCA")
+        break;
+      case 'screening':
+        console.log("SCREENING")
+        break;
+      case 'costs':
+        navigate(generatePath('cost/:costid', {costid: item.id}))
+        break;
+    }
+  }
+
   return (
-    <div className='recent-item' >{item.name} last edited {item.lastEdit}</div>
+    <div>
+    <div className='recent-item' onClick={onClick} >{item.name} last edited {item.lastEdit}</div>
+    </div>
   )
 }
 

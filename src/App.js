@@ -13,7 +13,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Dashboard from './components/Dashboard';
 import NewProject from './components/NewProject';
 import UpdateProject from './components/UpdateProject';
-
+import Costs from './components/Costs';
 function App() {
   const [projects, setProjects] = useState([
     {
@@ -50,12 +50,30 @@ function App() {
           id: 0,
           name: 'cost 1',
           lastEdit: 'April 6th',
+          buildingId: 0, 
+          files: [
+            {
+              id: 0,
+              name: 'hindbærkræt-materials1.csv'
+            },
+            {
+              id: 1,
+              name: 'hindbærkræt-materials2.csv'
+            },
+          ]
         }
       ],
       buildings: [
         {
           id: 0,
           name: 'bygning 1',
+          type: 'Apartment',
+          levels: 5,
+          area: 2600,
+        },
+        {
+          id: 1,
+          name: 'bygning 2',
           type: 'Apartment',
           levels: 5,
           area: 2600,
@@ -150,6 +168,7 @@ function App() {
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
+          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects}/>}/>
         </Routes>
       </Router>
     </div>

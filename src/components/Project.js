@@ -12,7 +12,7 @@ const Project = ({ projects }) => {
 
   const navigate = useNavigate();
   const onUpdateProject = () => {
-    navigate(generatePath('update', { id: project.id }));
+    navigate(generatePath('update'));
       
   }
 
@@ -37,7 +37,7 @@ const Project = ({ projects }) => {
                   <BoxHeader title={"Recent"} />
                   <div>
                     {project.screenings.map(screening => (
-                      <RecentItem key={screening.id} item={screening} />
+                      <RecentItem key={screening.id} item={screening} type="screening"/>
                     ))}
                   </div>
                 </div>
@@ -56,7 +56,7 @@ const Project = ({ projects }) => {
                   <div>
                     {project.lca.map(lca => (
                       <div> 
-                        <RecentItem key={lca.id} item={lca} />
+                        <RecentItem key={lca.id} item={lca} type="lca"/>
                       </div>
                     ))}
                   </div>
@@ -79,7 +79,7 @@ const Project = ({ projects }) => {
                   <BoxHeader title={"Recent"} />
                   <div>
                     {project.costs.map(cost => (
-                      <RecentItem key={cost.id} item={cost} />
+                      <RecentItem key={cost.id} item={cost} type="costs"/>
                     ))}
                   </div>
                 </div>
