@@ -76,7 +76,7 @@ const UpdateProject = ({projects, onUpdateProject}) => {
     for(let i = 0; i < project.buildings.length; i++) {
         var building = project.buildings[i];
         console.log(building)
-        var rowData = {name: building.name, type: building.type, levels: building.levels, area: building.area}
+        var rowData = {id: building.id, name: building.name, type: building.type, levels: building.levels, area: building.area}
         initialData2.push(rowData)
     }
 
@@ -118,11 +118,21 @@ const UpdateProject = ({projects, onUpdateProject}) => {
         };
     }, []);
 
+    const checkBuildingID = (id) => {
+        for (let i = 0; i < rowData2.length; i++) {
+            if (id == rowData2[i].id) {
+                id++;
+                return checkBuildingID(id)
+            }
+        }
+        return id;
+    }
+
 
     //This is not the cleanest code I've ever made, but it works
     const addRow2 = useCallback(() => {
         const newRowData = [...rowData2];
-        newRowData.push({ 'name': 'Building name', 'type': 'Apartment', 'levels': 0, 'area': 0 });
+        newRowData.push({ 'id': checkBuildingID(rowData2.length),'name': 'Building name', 'type': 'Apartment', 'levels': 0, 'area': 0 });
         setRowData2(newRowData);
         rowData2 = [...newRowData]
     }, []);
@@ -162,7 +172,7 @@ const UpdateProject = ({projects, onUpdateProject}) => {
             ,
             screenings: [],
             lca: [],
-            costs: [],
+            costs: project.costs,
             buildings: rowData2
         }
 
