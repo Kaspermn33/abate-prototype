@@ -14,7 +14,7 @@ const Costs = ({ projects }) => {
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
     
-
+    console.log(project)
     const updateSelectedBuilding = (e) => {
         setBuilding(e);
         costs.buildingId = e;
@@ -163,7 +163,7 @@ const Costs = ({ projects }) => {
                     <div className='costs-results'>
                         <div className='costs-number-results'>
                             <div className='costs-price-m2'>
-                                <p className='price-excl-vat'>{Math.round(totalPrice/project.buildings.find(b => b.id == buildingId).area)}</p>
+                                <p className='price-excl-vat'>{Math.round(totalPrice/parseInt(project.buildings.find(b => b.id == buildingId).area))}</p>
                                 <p className='price-excl-vat-text'>price pr. m2 in dkk excl. vat</p>
                                 <p className='price-incl-vat'>{Math.round(totalPrice/project.buildings.find(b => b.id == buildingId).area*1.25)}</p>
                                 <p className='price-incl-vat-text'>price pr. m2 in dkk incl. vat</p>

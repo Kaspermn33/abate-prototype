@@ -62,7 +62,7 @@ const NewProject = ({ projects, onAddProject }) => {
         rowData1 = [...filteredData]
     }, []);
 
-    const initialData2 = [{ 'name': 'Building name', 'type': '', 'levels': 0, 'area': 0 }];
+    const initialData2 = [{ 'id': 0, 'name': 'Building name', 'type': '', 'levels': 0, 'area': 0 }];
     const gridRef2 = useRef();
 
     var [rowData2, setRowData2] = useState(initialData2);
@@ -101,11 +101,20 @@ const NewProject = ({ projects, onAddProject }) => {
         };
     }, []);
 
+    const checkBuildingID = (id) => {
+        for (let i = 0; i < rowData2.length; i++) {
+            if (id == rowData2[i].id) {
+                id++;
+                return checkBuildingID(id)
+            }
+        }
+        return id;
+    }
 
     //This is not the cleanest code I've ever made, but it works
     const addRow2 = useCallback(() => {
         const newRowData = [...rowData2];
-        newRowData.push({ 'name': 'Building name', 'type': 'Apartment', 'levels': 0, 'area': 0 });
+        newRowData.push({ 'id': checkBuildingID(rowData2.length), 'name': 'Building name', 'type': 'Apartment', 'levels': 0, 'area': 0 });
         setRowData2(newRowData);
         rowData2 = [...newRowData]
     }, []);

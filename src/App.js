@@ -101,7 +101,7 @@ function App() {
           name: 'bygning 2',
           type: 'Apartment',
           levels: 5,
-          area: 2600,
+          area: 6200,
         }
       ]
     },

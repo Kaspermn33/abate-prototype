@@ -1,12 +1,18 @@
 import { useNavigate, generatePath } from "react-router-dom";
 
-const RecentItem = ({type, item }) => {
+import { styled } from "@mui/material/styles";
+
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+
+
+
+const RecentItem = ({ type, item }) => {
   const navigate = useNavigate();
   const onClick = () => {
-    
-    
 
-    switch (type){
+
+
+    switch (type) {
       case 'lca':
         console.log("LCA")
         break;
@@ -14,14 +20,38 @@ const RecentItem = ({type, item }) => {
         console.log("SCREENING")
         break;
       case 'costs':
-        navigate(generatePath('cost/:costid', {costid: item.id}))
+        navigate(generatePath('cost/:costid', { costid: item.id }))
         break;
     }
   }
 
+  const HtmlTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: "#f5f5f9",
+      color: "rgba(0, 0, 0, 0.87)",
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: "1px solid #dadde9"
+    }
+  }));
+
   return (
     <div>
-    <div className='recent-item' onClick={onClick} >{item.name} last edited {item.lastEdit}</div>
+      <HtmlTooltip
+        title={
+          <div>
+            <p>Last edit on {item.lastEdit}</p>
+          </div>
+        }
+        placement="right"
+        arrow
+      >
+        <div className='recent-item' onClick={onClick} >{item.name} </div>
+      </HtmlTooltip>
+
+
     </div>
   )
 }
