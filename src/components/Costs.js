@@ -12,12 +12,14 @@ const Costs = ({ projects }) => {
     const project = projects.find(project => project.id == id)
     const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
     const [buildingId, setBuilding] = useState(costs.buildingId);
+    
 
     const updateSelectedBuilding = (e) => {
         setBuilding(e);
         costs.buildingId = e;
     }
 
+    
     const onUploadFile = () => {
         let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
         var newId = checkID(costs.files.length);
@@ -34,6 +36,7 @@ const Costs = ({ projects }) => {
         })
         setCosts(temp);
         setRowData(loadTableData(costs));
+        setTotalPrice(calculatePrice());
     }
 
     const checkID = (id) => {
@@ -59,6 +62,7 @@ const Costs = ({ projects }) => {
         setCosts(temp);
         setRowData(loadTableData(temp));
         project.costs.find(cost => cost.id == costid).files = temp.files;
+        setTotalPrice(calculatePrice());
     }
 
 
@@ -120,9 +124,10 @@ const Costs = ({ projects }) => {
 
     var [rowData, setRowData] = useState(initialRowData);
 
-
-
-
+    const calculatePrice = () => {
+        return project.costs.find(cost => cost.id == costid).files.length*500000;
+    }
+    const [totalPrice, setTotalPrice]= useState(calculatePrice());
 
     return (
         <div>
@@ -149,26 +154,30 @@ const Costs = ({ projects }) => {
                     <div className='costs-results'>
                         <div className='costs-number-results'>
                             <div className='costs-price-m2'>
-                                <p className='price-excl-vat'>4200</p>
+                                <p className='price-excl-vat'>{Math.round(totalPrice/project.buildings.find(b => b.id == buildingId).area)}</p>
                                 <p className='price-excl-vat-text'>price pr. m2 in dkk excl. vat</p>
-                                <p className='price-incl-vat'>5250</p>
+                                <p className='price-incl-vat'>{Math.round(totalPrice/project.buildings.find(b => b.id == buildingId).area*1.25)}</p>
                                 <p className='price-incl-vat-text'>price pr. m2 in dkk incl. vat</p>
                             </div>
                             <div className='costs-price-total'>
-                                <p className='price-excl-vat'>4.200.000</p>
+                                <p className='price-excl-vat'>{totalPrice}</p>
                                 <p className='price-excl-vat-text'>total price in dkk excl. vat</p>
-                                <p className='price-incl-vat'>5.250.000</p>
+                                <p className='price-incl-vat'>{totalPrice*1.25}</p>
                                 <p className='price-incl-vat-text'>total price in dkk incl. vat</p>
                             </div>
                         </div>
                         <div className='costs-dist-building-parts'>
                             <p className='graph-header'>Cost distribution for building parts</p>
-                            <img className='graph-image' src={BPPic} />
+                            {totalPrice != 0 ? <img className='graph-image' src={BPPic} />
+                            :<div></div>
+                            }
                             <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>
                         <div className='costs-dist-materials'>
                             <p className='graph-header'>Cost distribution for materials</p>
-                            <img className='graph-image' src={MatPic} />
+                            {totalPrice != 0 ? <img className='graph-image' src={MatPic} />
+                            :<div></div>
+                            }
                             <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>
                     </div>
