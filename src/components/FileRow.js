@@ -20,12 +20,14 @@ const FileRow = ({ file, onDeleteFile }) => {
     return (
         <div className='file-row'>
             <p className='costs-file'>{file.name}</p>
+            <div className='file-row-dots'>
             <Dropdown className={styles.bootstrap}>
                 <Dropdown.Toggle as={CustomToggle} />
                 <Dropdown.Menu size="sm" title="bla">
                     <Dropdown.Item onClick={() => deleteFile(file)}>Delete file</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
+            </div>
         </div>
     )
 }
