@@ -12,6 +12,7 @@ const Costs = ({ projects }) => {
     const project = projects.find(project => project.id == id)
     const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
     const [buildingId, setBuilding] = useState(costs.buildingId);
+    const [costsName, setCostsName] = useState(costs.name)
     
 
     const updateSelectedBuilding = (e) => {
@@ -19,6 +20,13 @@ const Costs = ({ projects }) => {
         costs.buildingId = e;
     }
 
+    const updateCostsName = (e) => {
+        setCostsName(e);
+        let temp = { id: costid, name: e, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
+        setCosts(temp)
+        project.costs.find(cost => cost.id == costid).name = e;
+        console.log(costs)
+    }
     
     const onUploadFile = () => {
         let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
@@ -134,7 +142,8 @@ const Costs = ({ projects }) => {
             <Header title={project.name} />
             <div className='costs'>
                 <div className='costs-header'>
-                    <h1>{costs.name}</h1>
+                    <input className='costs-header-name' type='text' value={costsName} onChange={(e) => updateCostsName(e.target.value)}/>
+                    
                     <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
                         {project.buildings.map(building => (
                             <option value={building.id}>{building.name}</option>
