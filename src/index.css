@@ -158,6 +158,7 @@ code {
   height: 63px;
   max-height:63px;
   margin-top: 0px;
+  margin-bottom: 0px;;
   padding-top:0px;
   padding-bottom:0px;
   text-align: center;
@@ -243,7 +244,8 @@ code {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
+  margin-top: 5px;
   line-height: 23px;
   margin-left: 20px;
   margin-right:20px;
@@ -301,6 +303,10 @@ code {
   display: flex;
 }
 
+.new-box:hover {
+  background-color:#F1F2F7;
+}
+
 .screening-box {
   width: 707px;
   height: 316px;
@@ -323,6 +329,10 @@ code {
   margin-bottom: 0px;
 }
 
+.manage-project-box:hover {
+  background-color:#F1F2F7;
+}
+
 .new-box {
   width: 343px;
   height: 253px;background: rgba(241, 242, 247, 0.1);
@@ -341,6 +351,12 @@ code {
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
+  
+}
+
+.recent-costs {
+  overflow-y: scroll;
+  height: 189px;
 }
 
 .manage-project-box {

@@ -17,6 +17,31 @@ const Project = ({ projects }) => {
   }
 
 
+  const onNewCosts = () => {
+    let newId = checkCostID(project.costs.length)
+    let temp = {
+      id: newId,
+      name: 'New cost estimation' + newId,
+      lastEdit: 'April 6th',
+      buildingId: 0, 
+      files: [],
+      standAloneMaterials : []
+    }
+    project.costs.push(temp)
+    navigate(generatePath('cost/' + newId))
+  }
+
+
+  const checkCostID = (id) => {
+    for (let i = 0; i < project.costs.length; i++) {
+        if (id == project.costs[i].id) {
+            id++;
+            return checkCostID(id)
+        }
+    }
+    return id;
+}
+
   return (
     <div className='main-body'>
       <Header title={project.name} />
@@ -71,13 +96,13 @@ const Project = ({ projects }) => {
             <div className='costs-box'>
               <h2>Costs</h2>
               <div className='box-type'>
-                <div className='new-box'>
+                <div className='new-box' onClick={onNewCosts}>
                   <BoxHeader title={"New"} />
                   <p className='project-text'>Creates a new empty material cost estimation</p>
                 </div>
                 <div className='recent'>
                   <BoxHeader title={"Recent"} />
-                  <div>
+                  <div className='recent-costs'>
                     {project.costs.map(cost => (
                       <RecentItem key={cost.id} item={cost} type="costs"/>
                     ))}
