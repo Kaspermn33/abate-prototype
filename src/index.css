@@ -41,6 +41,12 @@ code {
 .logo-text {
   padding-left: 20px;
   width: 150px;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
 
 .header-title {
@@ -469,16 +475,7 @@ code {
   overflow-y: scroll;
 }
 
-.costs-file {
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 20px;
-}
 
-.costs-file:hover {
-  background-color: #F1F2F7;
-}
 
 .costs-results {
   display: flex;
@@ -579,4 +576,33 @@ code {
   font-size: 26px;
   margin-top: 8px;
   margin-bottom: 0px;
+}
+
+.file-row {
+  display: flex;
+  justify-content:space-between;
+  max-height: 45px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.file-row-dots {
+  margin-top: 4px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.file-row-dots:hover {
+  background-color: darkgrey;
+}
+
+.costs-file {
+  margin-left: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 20px;
+}
+
+.file-row:hover {
+  background-color: #F1F2F7;
 }

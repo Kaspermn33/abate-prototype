@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 import BPPic from './building-part.png'
 import MatPic from './material-price.png'
+import FileRow from './FileRow';
 
 const Costs = ({ projects }) => {
     const { id, costid } = useParams()
@@ -18,9 +19,10 @@ const Costs = ({ projects }) => {
     }
 
     const onUploadFile = () => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, files: costs.files }
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
+        var newId = checkID(costs.files.length);
         temp.files.push({
-            id: costs.files.length, name: 'hindbærkræt-materials' + costs.files.length + '.csv', materials: [{
+            id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv', materials: [{
                 part_id: 'beof_roof_1',
                 build_part: 'Roof',
                 mat_name: 'Screen tiles',
@@ -31,7 +33,32 @@ const Costs = ({ projects }) => {
             }]
         })
         setCosts(temp);
-        setRowData(loadTableData());
+        setRowData(loadTableData(costs));
+    }
+
+    const checkID = (id) => {
+        for (let i = 0; i < costs.files.length; i++) {
+            if (id == costs.files[i].id) {
+                id++;
+                return checkID(id)
+            }
+        }
+        return id;
+    }
+
+    const deleteFile = (deletedFile) => {
+        console.log(deletedFile)
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: []}
+        for(let i = 0; i < costs.files.length; i++) {
+            let curFile = costs.files[i];
+            if(curFile.id != deletedFile.id) {
+                temp.files.push(curFile);
+            }
+        }
+
+        setCosts(temp);
+        setRowData(loadTableData(temp));
+        project.costs.find(cost => cost.id == costid).files = temp.files;
     }
 
 
@@ -77,10 +104,10 @@ const Costs = ({ projects }) => {
         },
     ]);
 
-    const loadTableData = () => {
+    const loadTableData = (input) => {
         let data = [];
-        for (let i = 0; i < costs.files.length; i++) {
-            let curFile = costs.files[i];
+        for (let i = 0; i < input.files.length; i++) {
+            let curFile = input.files[i];
             for (let j = 0; j < curFile.materials.length; j++) {
                 let curMat = curFile.materials[j];
                 data.push(curMat)
@@ -89,11 +116,11 @@ const Costs = ({ projects }) => {
         return data;
     }
 
-    let initialRowData = loadTableData();
+    let initialRowData = loadTableData(costs);
 
     var [rowData, setRowData] = useState(initialRowData);
 
-    console.log(costs)
+
 
 
 
@@ -115,7 +142,7 @@ const Costs = ({ projects }) => {
                             <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
                         <div className='costs-files'>
                             {costs.files.map(file => (
-                                <p className='costs-file'>{file.name}</p>
+                                <FileRow file={file} onDeleteFile={deleteFile}/>
                             ))}
                         </div>
                     </div>

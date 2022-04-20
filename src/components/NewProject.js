@@ -164,8 +164,9 @@ const NewProject = ({ projects, onAddProject }) => {
 
     const checkID = (id) => {
         for (let i = 0; i < projects.length; i++) {
-            if (id == projects[i]) {
-                return checkID(id++)
+            if (id == projects[i].id) {
+                id++
+                return checkID(id)
             }
         }
         return id;
