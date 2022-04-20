@@ -18,15 +18,24 @@ const Costs = ({ projects }) => {
     }
 
     const onUploadFile = () => {
-        let temp = {id: costid, name: costs.name, lastEdit: costs.lastEdit, files: costs.files}
-        temp.files.push({id: costs.files.length, name: 'hindbærkræt-materials' + costs.files.length + '.csv'})
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, files: costs.files }
+        temp.files.push({
+            id: costs.files.length, name: 'hindbærkræt-materials' + costs.files.length + '.csv', materials: [{
+                part_id: 'beof_roof_1',
+                build_part: 'Roof',
+                mat_name: 'Screen tiles',
+                db: 'Molio',
+                mat_id: 'IDID2222',
+                quantity: 30,
+                unit: 'm2'
+            }]
+        })
         setCosts(temp);
+        setRowData(loadTableData());
     }
 
 
 
-
-    console.log(buildingId)
     const gridRef = useRef();
     const defaultColDef = useMemo(() => {
         return {
@@ -36,7 +45,7 @@ const Costs = ({ projects }) => {
             resizable: true,
         };
     }, []);
-    
+
     const [columnDefs] = useState([
         {
             headerName: 'Part id',
@@ -68,7 +77,21 @@ const Costs = ({ projects }) => {
         },
     ]);
 
-    const rowData = [{ part_id: "asdasdas", build_part: 'Roof', mat_name: "Mat name", db: "Molio", mat_id: "IDIDID", quantity: "1.455", unit: "M3" }]
+    const loadTableData = () => {
+        let data = [];
+        for (let i = 0; i < costs.files.length; i++) {
+            let curFile = costs.files[i];
+            for (let j = 0; j < curFile.materials.length; j++) {
+                let curMat = curFile.materials[j];
+                data.push(curMat)
+            }
+        }
+        return data;
+    }
+
+    let initialRowData = loadTableData();
+
+    var [rowData, setRowData] = useState(initialRowData);
 
     console.log(costs)
 
@@ -79,7 +102,7 @@ const Costs = ({ projects }) => {
             <Header title={project.name} />
             <div className='costs'>
                 <div className='costs-header'>
-                    <h1>{costs.name}</h1> 
+                    <h1>{costs.name}</h1>
                     <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
                         {project.buildings.map(building => (
                             <option value={building.id}>{building.name}</option>
@@ -114,12 +137,12 @@ const Costs = ({ projects }) => {
                         <div className='costs-dist-building-parts'>
                             <p className='graph-header'>Cost distribution for building parts</p>
                             <img className='graph-image' src={BPPic} />
-                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>    
+                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>
                         <div className='costs-dist-materials'>
                             <p className='graph-header'>Cost distribution for materials</p>
                             <img className='graph-image' src={MatPic} />
-                            <p className='price-excl-vat-text'>price in dkk excl. vat</p> 
+                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>
                     </div>
                     <div className='costs-materials'>
