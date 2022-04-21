@@ -91,14 +91,14 @@ function App() {
       buildings: [
         {
           id: 0,
-          name: 'bygning 1',
+          name: 'Bygning 1',
           type: 'Apartment',
           levels: 5,
           area: 2600,
         },
         {
           id: 1,
-          name: 'bygning 2',
+          name: 'Bygning 2',
           type: 'Apartment',
           levels: 5,
           area: 6200,

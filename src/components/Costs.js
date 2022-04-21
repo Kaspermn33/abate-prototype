@@ -1,11 +1,15 @@
 import React, { useRef, useMemo, useState } from 'react'
 import { RiFileUploadLine } from 'react-icons/ri'
+import { BiCog } from 'react-icons/bi'
 import Header from './Header'
 import { useParams } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 import BPPic from './building-part.png'
 import MatPic from './material-price.png'
 import FileRow from './FileRow';
+import Dropdown from "react-bootstrap/Dropdown";
+import styles from "./foo.module.scss";
+
 
 const Costs = ({ projects }) => {
     const { id, costid } = useParams()
@@ -13,7 +17,7 @@ const Costs = ({ projects }) => {
     const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
-    
+
     console.log(project)
     const updateSelectedBuilding = (e) => {
         setBuilding(e);
@@ -27,7 +31,7 @@ const Costs = ({ projects }) => {
         project.costs.find(cost => cost.id == costid).name = e;
         console.log(costs)
     }
-    
+
     const onUploadFile = () => {
         let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
         var newId = checkID(costs.files.length);
@@ -59,10 +63,10 @@ const Costs = ({ projects }) => {
 
     const deleteFile = (deletedFile) => {
         console.log(deletedFile)
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: []}
-        for(let i = 0; i < costs.files.length; i++) {
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: [] }
+        for (let i = 0; i < costs.files.length; i++) {
             let curFile = costs.files[i];
-            if(curFile.id != deletedFile.id) {
+            if (curFile.id != deletedFile.id) {
                 temp.files.push(curFile);
             }
         }
@@ -133,59 +137,103 @@ const Costs = ({ projects }) => {
     var [rowData, setRowData] = useState(initialRowData);
 
     const calculatePrice = () => {
-        return project.costs.find(cost => cost.id == costid).files.length*500000;
+        return project.costs.find(cost => cost.id == costid).files.length * 500000;
     }
-    const [totalPrice, setTotalPrice]= useState(calculatePrice());
+    const [totalPrice, setTotalPrice] = useState(calculatePrice());
+
+
+    const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+        <a href="/" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
+            {children}
+            <BiCog className='costs-settings-cog'/>
+        </a>
+    ));
+
+    const exportEstimation = () => {
+        console.log("MOCKING EXPORT OF ESTIMATION")
+    }
+
+    const deleteEstimation = () => {
+        console.log("MOCKING DELETE ESTIMATION")
+    }
+
+    const renameEstimation = () => {
+        console.log("RENAME MOCK")
+    }
+
 
     return (
         <div>
             <Header title={project.name} />
             <div className='costs'>
                 <div className='costs-header'>
-                    <input className='costs-header-name' type='text' value={costsName} onChange={(e) => updateCostsName(e.target.value)}/>
-                    
-                    <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
-                        {project.buildings.map(building => (
-                            <option value={building.id}>{building.name}</option>
-                        ))}
-                    </select>
+                    <input className='costs-header-name' type='text' value={costsName} onChange={(e) => updateCostsName(e.target.value)} />
+                    <div className='costs-header-right'>
+                        <div>
+                            <Dropdown className={styles.bootstrap}>
+                                <Dropdown.Toggle as={CustomToggle} />
+                                <Dropdown.Menu size="sm" title="bla">
+                                    <Dropdown.Item onClick={() => exportEstimation()}>Export</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => deleteEstimation()}>Delete</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => renameEstimation()}>Rename</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+
+                    </div>
                 </div>
                 <div className='costs-body'>
-                    <div className='costs-files-container'>
-                        <div className='costs-files-header'>
-                            <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
-                        <div className='costs-files'>
-                            {costs.files.map(file => (
-                                <FileRow file={file} onDeleteFile={deleteFile}/>
+                    <div className='costs-row-one'>
+                        <div>
+                        <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
+                            {project.buildings.map(building => (
+                                <option value={building.id}>{building.name}</option>
                             ))}
+                        </select>
+                        <div className='costs-building-details'>
+                            <div>
+                                <p className='building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
+                                <p className='building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
+                                <p className='building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div className='costs-files-container'>
+                            <div className='costs-files-header'>
+                                <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
+                            <div className='costs-files'>
+                                {costs.files.map(file => (
+                                    <FileRow file={file} onDeleteFile={deleteFile} />
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <div className='costs-results'>
                         <div className='costs-number-results'>
                             <div className='costs-price-m2'>
-                                <p className='price-excl-vat'>{Math.round(totalPrice/parseInt(project.buildings.find(b => b.id == buildingId).area))}</p>
+                                <p className='price-excl-vat'>{Math.round(totalPrice / parseInt(project.buildings.find(b => b.id == buildingId).area))}</p>
                                 <p className='price-excl-vat-text'>price pr. m2 in dkk excl. vat</p>
-                                <p className='price-incl-vat'>{Math.round(totalPrice/project.buildings.find(b => b.id == buildingId).area*1.25)}</p>
+                                <p className='price-incl-vat'>{Math.round(totalPrice / project.buildings.find(b => b.id == buildingId).area * 1.25)}</p>
                                 <p className='price-incl-vat-text'>price pr. m2 in dkk incl. vat</p>
                             </div>
                             <div className='costs-price-total'>
                                 <p className='price-excl-vat'>{totalPrice}</p>
                                 <p className='price-excl-vat-text'>total price in dkk excl. vat</p>
-                                <p className='price-incl-vat'>{totalPrice*1.25}</p>
+                                <p className='price-incl-vat'>{totalPrice * 1.25}</p>
                                 <p className='price-incl-vat-text'>total price in dkk incl. vat</p>
                             </div>
                         </div>
                         <div className='costs-dist-building-parts'>
                             <p className='graph-header'>Cost distribution for building parts</p>
                             {totalPrice != 0 ? <img className='graph-image' src={BPPic} />
-                            :<div></div>
+                                : <div></div>
                             }
                             <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>
                         <div className='costs-dist-materials'>
                             <p className='graph-header'>Cost distribution for materials</p>
                             {totalPrice != 0 ? <img className='graph-image' src={MatPic} />
-                            :<div></div>
+                                : <div></div>
                             }
                             <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                         </div>

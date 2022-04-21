@@ -470,10 +470,36 @@ code {
   display: flex;
 }
 
+.costs-header-right {
+  display:block;
+  flex-direction: column;
+}
+
+.costs-settings-cog {
+  font-size: 26px;
+  margin-left: 70px;
+  margin-top: 10px;
+  color: black;
+
+}
+
 .building-select {
+  margin-top: 15px;
   height: 25px;
-  margin-top: 35px;
+  width: 222px;
+  font-size: 16px;
   font-weight: bold;
+  font-family: 'Poppins';
+  border: 1px;
+  
+}
+
+.building-details-text {
+  margin-top: 7px;
+  margin-bottom: 0px;
+  margin-left: 4px;
+  font-size: 14px;
+  
 }
 
 .costs-files-container {
@@ -484,15 +510,32 @@ code {
   margin-left: 121px;
 }
 
+.costs-row-one {
+  display: flex;
+  
+}
+
 .costs-files {
   margin-bottom: 20px;
-  width: 1192px;
+  width: 952px;
   height: 100px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   overflow-y: scroll;
+}
+
+.costs-building-details {
+  height: 100px;
+  width: 222px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  margin-top: 1px;
+  margin-right: 20px;
+  justify-content: center;
 }
 
 
