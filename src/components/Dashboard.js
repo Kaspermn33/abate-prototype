@@ -4,11 +4,13 @@ import ProjectItem from './ProjectItem'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Dashboard = ({ onUpdate, projects }) => {
+const Dashboard = ({ onUpdate, projects, onSetCurrentProject }) => {
   const navigate = useNavigate();
   const onClick = () => {
     //onUpdate(true);
   }
+
+  onSetCurrentProject();
 
   const newProject = () => {
     navigate("/newproject");

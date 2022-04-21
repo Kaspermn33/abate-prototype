@@ -5,45 +5,44 @@ import { Link } from 'react-router-dom';
 import './Navbar.scss'
 import Header from './Header';
 import Logo from './Logo';
-const Navbar = (projectSelected, onUpdate) => {
+const Navbar = ({project}) => {
 
 
-    //NOT THE PROPER WAY
-    const screenings = [
-        {
-            id: 1,
-            name: 'Screening 1',
-        },
-        {
-            id: 2,
-            name: 'Screening 2',
-        },
-    ];
+    
 
-    console.log(projectSelected)
+    const costNavigate = (cost) => {
+        console.log(cost)
+    }
 
     return (
         <div>
             <Logo/>
-        <ProSidebar>
+        <ProSidebar> 
 
             <p>MENU</p>
                 <Menu iconShape="square">
                     <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" /></MenuItem>
-                    <MenuItem icon={<FaGem />}>Project <Link to="/project/" /></MenuItem>
+                    {project == undefined ? <div></div>
+                    :
+                    <div>
+                    <MenuItem icon={<FaGem />}>{project.name} <Link to={"/project/" + project.id} /></MenuItem>
                     <SubMenu title="Screening" icon={<FaHeart />}>
-                        {screenings.map(screening => (
-                            <MenuItem>{screening.name} <Link to={"/screening/" + screening.id.toString()} /> </MenuItem>
+                        {project.screenings.map(screening => (
+                            <MenuItem>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu >
                     <SubMenu title="Cost" icon={<FaHeart />}>
-                        <MenuItem>Component 1<Link to="/projects" /></MenuItem>
-                        <MenuItem>Component 2</MenuItem>
+                    {project.costs.map(cost => (
+                            <MenuItem >{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
+                        ))}
                     </SubMenu>
                     <SubMenu title="LCA" icon={<FaHeart />}>
-                        <MenuItem>Component 1<Link to="/projects" /></MenuItem>
-                        <MenuItem>Component 2</MenuItem>
+                    {project.lca.map(lca => (
+                            <MenuItem>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
+                        ))}
                     </SubMenu>
+                    </div>
+                    }
                 </Menu>
             <p>OTHERS</p>
             <Menu iconShape="square">

@@ -152,6 +152,13 @@ function App() {
 
   const [projectSelected, setProjectSelected] = useState(false);
 
+  const [currentProject, setCurrentProject] = useState();
+
+  const onSetCurrentProject = (project) => {
+    setCurrentProject(project)
+    console.log("DASHBOARD", project)
+  }
+
   const onSetProjectSelected = (b) => {
     console.log("should update")
     setProjectSelected(b);
@@ -190,14 +197,14 @@ function App() {
   return (
     <div className='app'>
       <Router>
-        <Navbar projectSelected={projectSelected} onUpdate={onSetProjectSelected}/>
+        <Navbar project={currentProject}/>
         <Routes>
-          <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects}/>} />
-          <Route path="/project/:id" element={<Project projects={projects}/>} />
+          <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
+          <Route path="/project/:id" element={<Project projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
-          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onUpdateCost={updateCost}/>}/>
+          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onUpdateCost={updateCost} onSetCurrentProject={onSetCurrentProject}/>}/>
         </Routes>
       </Router>
     </div>

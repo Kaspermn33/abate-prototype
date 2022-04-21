@@ -6,7 +6,7 @@ import {GrCycle} from 'react-icons/gr'
 import { useNavigate, generatePath } from "react-router-dom";
 
 import Header from './Header'
-const Project = ({ projects }) => {
+const Project = ({ projects, onSetCurrentProject }) => {
   const { id } = useParams()
   const project = projects.find(project => project.id == id)
 
@@ -16,6 +16,7 @@ const Project = ({ projects }) => {
       
   }
 
+  onSetCurrentProject(project);
 
   const onNewCosts = () => {
     let newId = checkCostID(project.costs.length)

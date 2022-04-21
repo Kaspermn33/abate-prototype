@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useState, useCallback } from 'react'
 import { RiFileUploadLine } from 'react-icons/ri'
-import {GrPowerReset} from 'react-icons/gr'
+import { GrPowerReset } from 'react-icons/gr'
 import { BiCog } from 'react-icons/bi'
 import Header from './Header'
 import { useParams } from 'react-router-dom';
@@ -12,14 +12,35 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./foo.module.scss";
 
 
-const Costs = ({ projects }) => {
+const Costs = ({ projects, onSetCurrentProject }) => {
     const { id, costid } = useParams()
     const project = projects.find(project => project.id == id)
     const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
+    let initialRowData = []
+    const loadTableData = (input) => {
+        let data = [];
+        if(input.files.length != 0){
+            for (let i = 0; i < input.files.length; i++) {
+            let curFile = input.files[i];
+                for (let j = 0; j < curFile.materials.length; j++) {
+                    let curMat = curFile.materials[j];
+                    data.push(curMat)
+                }
+            }
+        }
+        
+        return data;
+    }
 
-    console.log(project)
+    initialRowData = loadTableData(costs);
+
+    var [rowData, setRowData] = useState(initialRowData);
+
+
+    
+
     const updateSelectedBuilding = (e) => {
         setBuilding(e);
         costs.buildingId = e;
@@ -87,7 +108,7 @@ const Costs = ({ projects }) => {
             minWidth: 130,
             editable: true,
             resizable: true,
-            menuTabs: ['filterMenuTab', 'generalMenuTab','columnsMenuTab']
+            menuTabs: ['filterMenuTab', 'generalMenuTab', 'columnsMenuTab']
         };
     }, []);
 
@@ -131,23 +152,11 @@ const Costs = ({ projects }) => {
 
     const clearFilters = useCallback(() => {
         gridRef.current.api.setFilterModel(null);
-      }, []);
+    }, []);
 
-    const loadTableData = (input) => {
-        let data = [];
-        for (let i = 0; i < input.files.length; i++) {
-            let curFile = input.files[i];
-            for (let j = 0; j < curFile.materials.length; j++) {
-                let curMat = curFile.materials[j];
-                data.push(curMat)
-            }
-        }
-        return data;
-    }
+    
 
-    let initialRowData = loadTableData(costs);
-
-    var [rowData, setRowData] = useState(initialRowData);
+    
 
     const calculatePrice = () => {
         return project.costs.find(cost => cost.id == costid).files.length * 500000;
@@ -158,7 +167,7 @@ const Costs = ({ projects }) => {
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <a href="/" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
             {children}
-            <BiCog className='costs-settings-cog'/>
+            <BiCog className='costs-settings-cog' />
         </a>
     ));
 
@@ -198,18 +207,18 @@ const Costs = ({ projects }) => {
                 <div className='costs-body'>
                     <div className='costs-row-one'>
                         <div>
-                        <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
-                            {project.buildings.map(building => (
-                                <option value={building.id}>{building.name}</option>
-                            ))}
-                        </select>
-                        <div className='costs-building-details'>
-                            <div>
-                                <p className='building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
-                                <p className='building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
-                                <p className='building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                            <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
+                                {project.buildings.map(building => (
+                                    <option value={building.id}>{building.name}</option>
+                                ))}
+                            </select>
+                            <div className='costs-building-details'>
+                                <div>
+                                    <p className='building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
+                                    <p className='building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
+                                    <p className='building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div className='costs-files-container'>
                             <div className='costs-files-header'>
@@ -254,11 +263,11 @@ const Costs = ({ projects }) => {
                     <div className='costs-materials'>
                         <div className='materials-header'>
                             <div>
-                        <p className='materials-header-text'>Materials used in estimation:</p>
-                        </div>
-                        <div className='reset-filters-icon'>
-                            <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters}/>
-                        </div>
+                                <p className='materials-header-text'>Materials used in estimation:</p>
+                            </div>
+                            <div className='reset-filters-icon'>
+                                <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters} />
+                            </div>
                         </div>
                         <div className="ag-theme-alpine" style={{ height: 350, width: 1192 }}>
                             <AgGridReact
