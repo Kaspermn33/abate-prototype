@@ -28,17 +28,17 @@ const Navbar = ({project}) => {
                     <MenuItem icon={<FaGem />}>{project.name} <Link to={"/project/" + project.id} /></MenuItem>
                     <SubMenu title="Screening" icon={<FaHeart />}>
                         {project.screenings.map(screening => (
-                            <MenuItem>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
+                            <MenuItem key={screening.id}>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu >
                     <SubMenu title="Cost" icon={<FaHeart />}>
                     {project.costs.map(cost => (
-                            <MenuItem >{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
+                            <MenuItem key={cost.id}>{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
                         ))}
                     </SubMenu>
                     <SubMenu title="LCA" icon={<FaHeart />}>
                     {project.lca.map(lca => (
-                            <MenuItem>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
+                            <MenuItem key={lca.id}>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu>
                     </div>

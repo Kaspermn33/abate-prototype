@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState, useCallback } from 'react'
+import React, { useRef, useMemo, useState, useCallback, useEffect } from 'react'
 import { RiFileUploadLine } from 'react-icons/ri'
 import { GrPowerReset } from 'react-icons/gr'
 import { BiCog } from 'react-icons/bi'
@@ -18,6 +18,10 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
+    const calculatePrice = () => {
+        return project.costs.find(cost => cost.id == costid).files.length * 500000;
+    }
+    const [totalPrice, setTotalPrice] = useState(calculatePrice());
     let initialRowData = []
     const loadTableData = (input) => {
         let data = [];
@@ -31,12 +35,34 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             }
         }
         
-        return data;
+        return data; 
     }
 
     initialRowData = loadTableData(costs);
 
     var [rowData, setRowData] = useState(initialRowData);
+
+
+    //This is a mess, somehow costs was one behind, but this works
+    useEffect(() => {
+        setCosts(project.costs.find(cost => cost.id == costid))
+        console.log(costs.id, loadTableData(costs))
+        if(costs.id != project.costs.find(cost => cost.id == costid).id ) {
+            console.log("")
+            console.log("RERENDER")
+            
+            setCostsName(project.costs.find(cost => cost.id == costid).name)
+            setBuilding(project.costs.find(cost => cost.id == costid).buildingId)
+            setTotalPrice(calculatePrice())
+            console.log("BEFORE", rowData)
+            setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
+            console.log("AFTER", rowData)
+        }   
+        
+        
+    })
+
+    
 
 
     
@@ -158,10 +184,8 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
     
 
-    const calculatePrice = () => {
-        return project.costs.find(cost => cost.id == costid).files.length * 500000;
-    }
-    const [totalPrice, setTotalPrice] = useState(calculatePrice());
+    
+    
 
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
