@@ -1,5 +1,6 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo, useState, useCallback } from 'react'
 import { RiFileUploadLine } from 'react-icons/ri'
+import {GrPowerReset} from 'react-icons/gr'
 import { BiCog } from 'react-icons/bi'
 import Header from './Header'
 import { useParams } from 'react-router-dom';
@@ -86,6 +87,7 @@ const Costs = ({ projects }) => {
             minWidth: 130,
             editable: true,
             resizable: true,
+            menuTabs: ['filterMenuTab', 'generalMenuTab','columnsMenuTab']
         };
     }, []);
 
@@ -93,32 +95,43 @@ const Costs = ({ projects }) => {
         {
             headerName: 'Part id',
             field: 'part_id',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Building part',
             field: 'build_part',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Material name',
             field: 'mat_name',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Database',
             field: 'db',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Material ID',
             field: 'mat_id',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Quantity',
             field: 'quantity',
+            filter: 'agTextColumnFilter'
         },
         {
             headerName: 'Unit of Measure',
             field: 'unit',
+            filter: 'agTextColumnFilter'
         },
     ]);
+
+    const clearFilters = useCallback(() => {
+        gridRef.current.api.setFilterModel(null);
+      }, []);
 
     const loadTableData = (input) => {
         let data = [];
@@ -239,7 +252,14 @@ const Costs = ({ projects }) => {
                         </div>
                     </div>
                     <div className='costs-materials'>
+                        <div className='materials-header'>
+                            <div>
                         <p className='materials-header-text'>Materials used in estimation:</p>
+                        </div>
+                        <div className='reset-filters-icon'>
+                            <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters}/>
+                        </div>
+                        </div>
                         <div className="ag-theme-alpine" style={{ height: 350, width: 1192 }}>
                             <AgGridReact
                                 ref={gridRef}
