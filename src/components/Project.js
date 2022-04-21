@@ -114,7 +114,7 @@ const Project = ({ projects }) => {
               <h2>Manage project</h2>
               <div className='manage-project-box' onClick={onUpdateProject}>
                 <BoxHeader title={"Make changes"} />
-                <div>
+                <div className='project-details'>
                 <h2 className='project-name'>{project.name}</h2>
                 <div className='cont-desc-box'>
                   <div className='contributors-box'>

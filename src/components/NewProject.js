@@ -1,6 +1,7 @@
 import Header from "./Header"
 import React, { useState, useMemo, useCallback, useRef } from "react";
 import { AgGridReact } from 'ag-grid-react';
+import { AiOutlineUserAdd, AiOutlineUserDelete, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -205,8 +206,7 @@ const NewProject = ({ projects, onAddProject }) => {
                         </div>
 
                         <div className='new-project-contributors'>
-                            <button onClick={addRow}>Add contributor</button>
-                            <button onClick={deleteRow}>Remove selected contributor</button>
+
                             <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
                                 <AgGridReact
                                     ref={gridRef1}
@@ -217,14 +217,20 @@ const NewProject = ({ projects, onAddProject }) => {
                                 >
                                 </AgGridReact>
                             </div>
+                            <div className='contributor-icons-container'>
+                                <div className='add-contributor-icon'>
+                                    <AiOutlineUserAdd onClick={addRow} />
+                                </div>
+                                <div className='remove-contributor-icon'>
+                                    <AiOutlineUserDelete onClick={deleteRow} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='new-project-right'>
                         <div className='new-project-buildings'>
                             <div>
                                 <h3>Buildings</h3>
-                                <button onClick={addRow2}>Add building</button>
-                                <button onClick={deleteRow2}>Remove selected building</button>
                             </div>
                             <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
                                 <AgGridReact
@@ -235,6 +241,14 @@ const NewProject = ({ projects, onAddProject }) => {
                                     rowSelection={'single'}
                                 >
                                 </AgGridReact>
+                            </div>
+                            <div className='building-icons-container'>
+                                <div className='add-building-icon'>
+                                    <AiOutlinePlusCircle onClick={addRow2} />
+                                </div>
+                                <div className='remove-building-icon'>
+                                    <AiOutlineMinusCircle onClick={deleteRow2} />
+                                </div>
                             </div>
                             <div className='creation-buttons'>
                                 <div>

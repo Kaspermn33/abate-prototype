@@ -240,6 +240,11 @@ code {
   margin-right:20px;
 }
 
+.project-details {
+  height: 185px;
+  overflow-y: scroll;
+}
+
 .recent-item {
   font-family: 'Poppins';
   font-style: normal;
@@ -374,7 +379,70 @@ code {
   
 }
 
+.contributor-icons-container {
+  display:flex;
+  justify-content: center;
+}
 
+.add-contributor-icon {
+  height: 35px;
+  width: 35px;
+  font-size: 25px;
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+
+.remove-contributor-icon {
+  height: 35px;
+  width: 35px;
+  font-size: 25px;
+  margin-left: 10px;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+
+.remove-contributor-icon:hover {
+  background-color:#aeafb1;
+}
+
+.add-contributor-icon:hover {
+  background-color:#aeafb1;
+}
+
+
+
+
+.building-icons-container {
+  display:flex;
+  justify-content: center;
+}
+
+.add-building-icon {
+  height: 41px;
+  width: 41px;
+  font-size: 35px;
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+
+.remove-building-icon {
+  height: 41px;
+  width: 41px;
+  font-size: 35px;
+  margin-left: 10px;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+
+.remove-building-icon:hover {
+  background-color:#aeafb1;
+}
+
+.add-building-icon:hover {
+  background-color:#aeafb1;
+}
 
 .new-project-main {
   display: flex;
@@ -440,6 +508,10 @@ code {
   border-radius: 15px;
 }
 
+.project-create-button:hover {
+  background-color:#082850;
+}
+
 .cancel-button {
   margin-top: 20px;
   width: 101px;
@@ -447,6 +519,10 @@ code {
   background: #F1F2F7;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+}
+
+.cancel-button:hover {
+  background-color: #aeafb1;
 }
 
 .search-project-body {
