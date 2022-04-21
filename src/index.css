@@ -539,7 +539,6 @@ code {
 }
 
 
-
 .costs-results {
   display: flex;
 }
@@ -674,4 +673,13 @@ code {
   width: 750px;
   all: unset;
   font-size: 32px;
+}
+
+
+.ag-theme-alpine .ag-header {
+  --ag-header-background-color: #1858A8;
+}
+
+.ag-pivot-off .ag-header-cell-label {
+  color: white;
 }
