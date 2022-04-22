@@ -90,7 +90,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             costs: project.costs,
             buildings: project.buildings
           }
-          onSetCurrentProject(tempProject);
+        onSetCurrentProject(tempProject);
     }
 
     const onUploadFile = () => {
