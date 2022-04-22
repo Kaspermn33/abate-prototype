@@ -8,7 +8,7 @@ import { useNavigate, generatePath } from "react-router-dom";
 import Header from './Header'
 const Project = ({ projects, onSetCurrentProject }) => {
   const { id } = useParams()
-  const project = projects.find(project => project.id == id)
+  let project = projects.find(project => project.id == id)
 
   const navigate = useNavigate();
   const onUpdateProject = () => {
@@ -29,6 +29,20 @@ const Project = ({ projects, onSetCurrentProject }) => {
       standAloneMaterials : []
     }
     project.costs.push(temp)
+
+    let tempProject = {
+      id: project.id,
+      name: project.name,
+      description: project.description,
+      lastEdit: project.lastEdit,
+      contributors: project.contributors,
+      screenings: project.screenings,
+      lca: project.lca,
+      costs: project.costs,
+      buildings: project.buildings
+    }
+    project = tempProject;
+    onSetCurrentProject(tempProject);
     navigate(generatePath('cost/' + newId))
   }
 
