@@ -78,6 +78,19 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         setCosts(temp)
         project.costs.find(cost => cost.id == costid).name = e;
         console.log(costs)
+
+        let tempProject = {
+            id: project.id,
+            name: project.name,
+            description: project.description,
+            lastEdit: project.lastEdit,
+            contributors: project.contributors,
+            screenings: project.screenings,
+            lca: project.lca,
+            costs: project.costs,
+            buildings: project.buildings
+          }
+          onSetCurrentProject(tempProject);
     }
 
     const onUploadFile = () => {
