@@ -149,11 +149,13 @@ function App() {
     },
   ]);
 
+ 
 
+  console.log("APP", projects[0])
   const [projectSelected, setProjectSelected] = useState(false);
 
   const [currentProject, setCurrentProject] = useState();
-
+  const [currentTool, setCurrentTool] = useState();
   const onSetCurrentProject = (project) => {
     setCurrentProject(project)
     console.log("DASHBOARD", project)
@@ -162,6 +164,46 @@ function App() {
   const onSetProjectSelected = (b) => {
     console.log("should update")
     setProjectSelected(b);
+  }
+
+  const onSetCurrentTool = (tool, type) => {
+    console.log("SET CURRENT TOOL", tool)
+    console.log("CURRENT PROJECT", currentProject)
+    setCurrentTool(tool);
+
+    let temp = {
+      id: currentProject.id,
+      name: currentProject.name,
+      description: currentProject.description,
+      lastEdit: currentProject.lastEdit,
+      contributors: currentProject.contributors,
+      screenings: currentProject.screenings,
+      lca: currentProject.lca,
+      costs: [],
+      buildings: currentProject.buildings
+    }
+
+    switch (type) {
+      case "costs":
+        for(let i = 0; i < currentProject.costs.length; i++) {
+          let current = currentProject.costs[i];
+          if(current.id = tool.id) {
+            temp.costs.push(tool)
+          }
+          else {
+            temp.costs.push(current);
+          }
+        }
+        break;
+      default:
+        console.log("default")
+        temp.costs = currentProject.costs;
+
+    }
+
+
+    console.log("SWITCH",temp.costs[0])
+    //setCurrentProject(temp);
   }
 
   const addProject = (newProject) => {
@@ -200,11 +242,11 @@ function App() {
         <Navbar project={currentProject}/>
         <Routes>
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
-          <Route path="/project/:id" element={<Project projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
+          <Route path="/project/:id" element={<Project projects={projects} onSetCurrentProject={onSetCurrentProject} onSetCurrentTool={onSetCurrentTool}/>} />
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
-          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onUpdateCost={updateCost} onSetCurrentProject={onSetCurrentProject}/>}/>
+          <Route path='/project/:id/cost/:costid' element={<Costs currentCost={currentTool} project={currentProject} onUpdateCost={updateCost} onSetCurrentCost={onSetCurrentTool}/>}/>
         </Routes>
       </Router>
     </div>

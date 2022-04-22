@@ -6,7 +6,7 @@ import {GrCycle} from 'react-icons/gr'
 import { useNavigate, generatePath } from "react-router-dom";
 
 import Header from './Header'
-const Project = ({ projects, onSetCurrentProject }) => {
+const Project = ({ projects, onSetCurrentProject, onSetCurrentTool }) => {
   const { id } = useParams()
   const project = projects.find(project => project.id == id)
 
@@ -19,6 +19,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
   onSetCurrentProject(project);
 
   const onNewCosts = () => {
+    console.log("new costs", project.costs)
     let newId = checkCostID(project.costs.length)
     let temp = {
       id: newId,
@@ -29,6 +30,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
       standAloneMaterials : []
     }
     project.costs.push(temp)
+    onSetCurrentTool(temp)
     navigate(generatePath('cost/' + newId))
   }
 
@@ -105,7 +107,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
                   <BoxHeader title={"Recent"} />
                   <div className='recent-costs'>
                     {project.costs.map(cost => (
-                      <RecentItem key={cost.id} item={cost} type="costs"/>
+                      <RecentItem key={cost.id} item={cost} type="costs" onSetCurrentTool={onSetCurrentTool}/>
                     ))}
                   </div>
                 </div>

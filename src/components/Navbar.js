@@ -11,7 +11,7 @@ const Navbar = ({project}) => {
     
 
     const costNavigate = (cost) => {
-        console.log(cost)
+        
     }
 
     return (

@@ -6,7 +6,7 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 
 
-const RecentItem = ({ type, item }) => {
+const RecentItem = ({ type, item, onSetCurrentTool }) => {
   const navigate = useNavigate();
   const onClick = () => {
 
@@ -20,6 +20,7 @@ const RecentItem = ({ type, item }) => {
         console.log("SCREENING")
         break;
       case 'costs':
+        onSetCurrentTool(item)
         navigate(generatePath('cost/:costid', { costid: item.id }))
         break;
     }

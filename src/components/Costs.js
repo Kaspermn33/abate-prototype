@@ -12,16 +12,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./foo.module.scss";
 
 
-const Costs = ({ projects, onSetCurrentProject }) => {
-    const { id, costid } = useParams()
-    const project = projects.find(project => project.id == id)
-    const [costs, setCosts] = useState(project.costs.find(cost => cost.id == costid));
-    const [buildingId, setBuilding] = useState(costs.buildingId);
-    const [costsName, setCostsName] = useState(costs.name)
-    const calculatePrice = () => {
-        return project.costs.find(cost => cost.id == costid).files.length * 500000;
+const Costs = ({ project, currentCost, onSetCurrentCost }) => {
+    const { id, costid } = useParams() 
+    const [buildingId, setBuilding] = useState(currentCost.buildingId);
+    const [costsName, setCostsName] = useState(currentCost.name)
+    const calculatePrice = (costs) => {
+        console.log("CALCUALTE PRICE", )
+        return costs.files.length * 500000;
     }
-    const [totalPrice, setTotalPrice] = useState(calculatePrice());
+    const [totalPrice, setTotalPrice] = useState(calculatePrice(currentCost));
     let initialRowData = []
     const loadTableData = (input) => {
         let data = [];
@@ -38,28 +37,27 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         return data; 
     }
 
-    initialRowData = loadTableData(costs);
+    
+    
+
+    initialRowData = loadTableData(currentCost);
 
     var [rowData, setRowData] = useState(initialRowData);
 
 
-    //This is a mess, somehow costs was one behind, but this works
     useEffect(() => {
-        setCosts(project.costs.find(cost => cost.id == costid))
-        console.log(costs.id, loadTableData(costs))
-        if(costs.id != project.costs.find(cost => cost.id == costid).id ) {
-            console.log("")
-            console.log("RERENDER")
-            
-            setCostsName(project.costs.find(cost => cost.id == costid).name)
-            setBuilding(project.costs.find(cost => cost.id == costid).buildingId)
-            setTotalPrice(calculatePrice())
-            console.log("BEFORE", rowData)
-            setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
-            console.log("AFTER", rowData)
-        }   
         
         
+        //Limits the rerenders drastically
+        if(currentCost.id != costid) {
+            let newCosts = project.costs.find(cost => cost.id == costid)
+            onSetCurrentCost(newCosts, "costs")
+            console.log("UPDATE IT ALL")
+            setBuilding(newCosts.buildingId)
+            setCostsName(newCosts.name)
+            setTotalPrice(calculatePrice(newCosts))
+            setRowData(loadTableData(newCosts))
+        }
     })
 
     
@@ -68,23 +66,32 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     
 
     const updateSelectedBuilding = (e) => {
+        //SHOULD UPDATE FUIRTHER BACK
+        console.log(buildingId)
         setBuilding(e);
-        costs.buildingId = e;
+        //currentCost.buildingId = e;
+        let temp = { id: costid, name: currentCost.name, lastEdit: currentCost.lastEdit, buildingId: e, files: currentCost.files }
+        onSetCurrentCost(temp, "costs")
+        console.log(e)
+        console.log(buildingId)
+        console.log(temp.buildingId)
     }
 
     const updateCostsName = (e) => {
         setCostsName(e);
-        let temp = { id: costid, name: e, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
-        setCosts(temp)
+        let temp = { id: costid, name: e, lastEdit: currentCost.lastEdit, buildingId: currentCost.buildingId, files: currentCost.files }
+        
+        //UPDATE currentCost instead
+        onSetCurrentCost(temp, "costs")
         project.costs.find(cost => cost.id == costid).name = e;
-        console.log(costs)
+        console.log(currentCost)
     }
 
     const onUploadFile = () => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
-        var newId = checkID(costs.files.length);
+        let temp = { id: costid, name: currentCost.name, lastEdit: currentCost.lastEdit, buildingId: currentCost.buildingId, files: currentCost.files }
+        var newId = checkID(currentCost.files.length);
         temp.files.push({
-            id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv', materials: [{
+            id: newId, name: 'hindbærkræt-materials' + currentCost.files.length + '.csv', materials: [{
                 part_id: 'beof_roof_1',
                 build_part: 'Roof',
                 mat_name: 'Screen tiles',
@@ -94,14 +101,15 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                 unit: 'm2'
             }]
         })
-        setCosts(temp);
-        setRowData(loadTableData(costs));
-        setTotalPrice(calculatePrice());
+        //SHOULD UPDATE CURRENT COSTS INSTEAD
+        onSetCurrentCost(temp, "costs")
+        setRowData(loadTableData(currentCost));
+        setTotalPrice(calculatePrice(currentCost));
     }
 
     const checkID = (id) => {
-        for (let i = 0; i < costs.files.length; i++) {
-            if (id == costs.files[i].id) {
+        for (let i = 0; i < currentCost.files.length; i++) {
+            if (id == currentCost.files[i].id) {
                 id++;
                 return checkID(id)
             }
@@ -111,18 +119,19 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
     const deleteFile = (deletedFile) => {
         console.log(deletedFile)
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: [] }
-        for (let i = 0; i < costs.files.length; i++) {
-            let curFile = costs.files[i];
+        let temp = { id: costid, name: currentCost.name, lastEdit: currentCost.lastEdit, buildingId: currentCost.buildingId, files: [] }
+        for (let i = 0; i < currentCost.files.length; i++) {
+            let curFile = currentCost.files[i];
             if (curFile.id != deletedFile.id) {
                 temp.files.push(curFile);
             }
         }
 
-        setCosts(temp);
+        //SHOULD UDPATE CURRENT COSTS INSTEAD
+        onSetCurrentCost(temp, "costs")
         setRowData(loadTableData(temp));
         project.costs.find(cost => cost.id == costid).files = temp.files;
-        setTotalPrice(calculatePrice());
+        setTotalPrice(calculatePrice(currentCost));
     }
 
 
@@ -248,7 +257,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                             <div className='costs-files-header'>
                                 <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
                             <div className='costs-files'>
-                                {costs.files.map(file => (
+                                {currentCost.files.map(file => (
                                     <FileRow file={file} onDeleteFile={deleteFile} />
                                 ))}
                             </div>
