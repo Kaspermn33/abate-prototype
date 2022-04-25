@@ -10,6 +10,7 @@ import MatPic from './material-price.png'
 import FileRow from './FileRow';
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./foo.module.scss";
+import { AiOutlineUserAdd, AiOutlineUserDelete, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 
 
 const Costs = ({ projects, onSetCurrentProject }) => {
@@ -56,8 +57,6 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             setTotalPrice(calculatePrice())
             setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
         }   
-        
-        
     })
 
     
@@ -158,6 +157,54 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         project.costs.find(cost => cost.id == costid).materials = temp.materials;
         setTotalPrice(calculatePrice());
     }
+
+    const addRow = () => {
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
+        
+
+        let matId = checkMaterialID(costs.materials.length);
+        temp.materials.push({
+            id: matId,
+            part_id: 'beof_roof_1',
+            file_id: null,
+            build_part: 'Roof',
+            mat_name: 'screen tiles',
+            db: 'Molio',
+            mat_id: 'IDID2222',
+            quantity: 30,
+            unit: 'm2'
+        })
+        setCosts(temp);
+        console.log(loadTableData(costs))
+        setRowData(loadTableData(costs));
+        setTotalPrice(calculatePrice());
+    };
+
+    const deleteRow =() => {
+        const selectedRowNodes = gridRef.current.api.getSelectedNodes();
+
+        const selectedIds = selectedRowNodes.map(function (rowNode) {
+            console.log(selectedRowNodes)
+            return parseInt(rowNode.data.id);
+        });
+
+        console.log(selectedIds)
+
+        var filteredData = [];
+        for (let i = 0; i < costs.materials.length; i++) {
+            console.log(selectedIds[0], costs.materials[i].id)
+            if (selectedIds[0] != costs.materials[i].id) {
+                filteredData.push(costs.materials[i]);
+            }
+        }
+
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: filteredData }
+
+        setCosts(temp);
+        setRowData(loadTableData(temp));
+        project.costs.find(cost => cost.id == costid).materials = temp.materials;
+        setTotalPrice(calculatePrice());
+    };
 
 
 
@@ -338,6 +385,14 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                             >
                             </AgGridReact>
                         </div>
+                        <div className='contributor-icons-container'>
+                                <div className='add-material-icon'>
+                                    <AiOutlinePlusCircle onClick={addRow} />
+                                </div>
+                                <div className='remove-material-icon'>
+                                    <AiOutlineMinusCircle onClick={deleteRow} />
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
