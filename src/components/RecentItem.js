@@ -14,10 +14,10 @@ const RecentItem = ({ type, item }) => {
 
     switch (type) {
       case 'lca':
-        console.log("LCA")
+        navigate(generatePath('lca/:lcaid', { lcaid: item.id }))
         break;
       case 'screening':
-        console.log("SCREENING")
+        navigate(generatePath('screening/:screeningid', { screeningid: item.id }))
         break;
       case 'costs':
         navigate(generatePath('cost/:costid', { costid: item.id }))

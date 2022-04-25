@@ -36,6 +36,16 @@ function App() {
           id: 0,
           name: 'Screening 1',
           lastEdit: 'April 6th',
+          buildingId: 0,
+          model1: {
+            name: "Model 1"
+          },
+          model2: {
+            name: "Model 2"
+          },
+          model3: {
+            name: "Model 3"
+          },
         }
       ],
       lca: [
@@ -190,10 +200,6 @@ function App() {
     console.log(newProjects)
   }
 
-  const updateCost = (updatedCost, projectId, costId) => {
-    
-  }
-
   return (
     <div className='app'>
       <Router>
@@ -204,7 +210,8 @@ function App() {
           <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
-          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onUpdateCost={updateCost} onSetCurrentProject={onSetCurrentProject}/>}/>
+          <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
+          <Route path='project/:id/screening/:screeningid' element={<Screening projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
         </Routes>
       </Router>
     </div>

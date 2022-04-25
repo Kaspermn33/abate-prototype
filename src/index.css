@@ -827,3 +827,81 @@ code {
 .ag-pivot-off .ag-header-cell-label {
   color: white;
 }
+
+
+.screening {
+  margin-left: 20px;
+}
+
+.screening-header {
+  justify-content:space-between;
+  display: flex;
+}
+
+.screening-models {
+  justify-content:space-between;
+  display: flex;
+  margin-top: 20px;
+}
+
+.screening-model {
+
+  width: 343px;
+  height: 595px;
+  left: 243px;
+  top: 182px;
+
+  background: rgba(241, 242, 247, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.model-header {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.material-radio-button-group-container {
+  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.material-radio-button-group {
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.material-radio-button {
+
+}
+
+.model-selection-header{ 
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.material-radio-button input[type="radio"] {
+  background-color: #C4C4C4;
+  height: 35px;
+  width: 53px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input[type="radio"]:checked {
+  background-color: rgba(6, 204, 85, 0.5);
+}
+
+
+.radio-button-text {
+  text-align: center;
+  font-size: 10px;
+  max-width: 47px;
+  margin-top: -35px;
+  margin-left: 8px;
+}
