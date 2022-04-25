@@ -202,6 +202,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+
         <a href="/" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
             {children}
             <BiCog className='costs-settings-cog' />
@@ -259,7 +260,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                         </div>
                         <div className='costs-files-container'>
                             <div className='costs-files-header'>
-                                <p className='costs-files-header-text'>Files uploaded:</p> <div onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
+                                <p className='costs-files-header-text'>Files uploaded:</p> <div className='upload-file-icon-container' onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
                             <div className='costs-files'>
                                 {costs.files.map(file => (
                                     <FileRow file={file} onDeleteFile={deleteFile} />

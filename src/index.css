@@ -556,7 +556,11 @@ code {
   margin-left: 70px;
   margin-top: 10px;
   color: black;
+  border-radius: 20px;
+}
 
+.costs-settings-cog:hover {
+  background-color: #aeafb1;
 }
 
 .building-select {
@@ -581,6 +585,8 @@ code {
 .costs-files-container {
   
 }
+
+
 
 .costs-body {
   margin-left: 121px;
@@ -707,7 +713,19 @@ code {
 }
 
 .upload-file-icon {
-  padding-top: 5px;
+  padding-top: 2px;
+  padding-left: 3px;
+}
+
+.upload-file-icon-container {
+  padding-left: 0px;
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+}
+
+.upload-file-icon-container:hover {
+  background-color: #aeafb1;
 }
 
 .materials-header {
