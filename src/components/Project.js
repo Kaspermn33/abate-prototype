@@ -26,7 +26,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
       lastEdit: 'April 6th',
       buildingId: 0, 
       files: [],
-      standAloneMaterials : []
+      materials : []
     }
     project.costs.push(temp)
 

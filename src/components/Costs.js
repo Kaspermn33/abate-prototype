@@ -19,22 +19,25 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
     const calculatePrice = () => {
-        return project.costs.find(cost => cost.id == costid).files.length * 500000;
+        if(project.costs.find(cost => cost.id == costid).materials.length != (0 || undefined)) {
+            return project.costs.find(cost => cost.id == costid).materials.length * 500000;
+        }
+        else {
+            return 0;
+        }
+        
     }
     const [totalPrice, setTotalPrice] = useState(calculatePrice());
     let initialRowData = []
     const loadTableData = (input) => {
         let data = [];
-        if(input.files.length != 0){
-            for (let i = 0; i < input.files.length; i++) {
-            let curFile = input.files[i];
-                for (let j = 0; j < curFile.materials.length; j++) {
-                    let curMat = curFile.materials[j];
-                    data.push(curMat)
-                }
+
+        if(input.materials.length != 0) {
+            for(let i = 0; i< input.materials.length; i++) {
+                let curMat = input.materials[i];
+                data.push(curMat);
             }
         }
-        
         return data; 
     }
 
@@ -46,17 +49,12 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     //This is a mess, somehow costs was one behind, but this works
     useEffect(() => {
         setCosts(project.costs.find(cost => cost.id == costid))
-        console.log(costs.id, loadTableData(costs))
         if(costs.id != project.costs.find(cost => cost.id == costid).id ) {
-            console.log("")
-            console.log("RERENDER")
             
             setCostsName(project.costs.find(cost => cost.id == costid).name)
             setBuilding(project.costs.find(cost => cost.id == costid).buildingId)
             setTotalPrice(calculatePrice())
-            console.log("BEFORE", rowData)
             setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
-            console.log("AFTER", rowData)
         }   
         
         
@@ -74,12 +72,11 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
     const updateCostsName = (e) => {
         setCostsName(e);
-        let temp = { id: costid, name: e, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
+        let temp = { id: costid, name: e, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
         setCosts(temp)
         project.costs.find(cost => cost.id == costid).name = e;
-        console.log(costs)
 
-        let tempProject = {
+        let tempProject = { 
             id: project.id,
             name: project.name,
             description: project.description,
@@ -94,20 +91,27 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     }
 
     const onUploadFile = () => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files }
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
         var newId = checkID(costs.files.length);
         temp.files.push({
-            id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv', materials: [{
-                part_id: 'beof_roof_1',
-                build_part: 'Roof',
-                mat_name: 'Screen tiles',
-                db: 'Molio',
-                mat_id: 'IDID2222',
-                quantity: 30,
-                unit: 'm2'
-            }]
+            id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv'
+        })
+        
+
+        let matId = checkMaterialID(costs.materials.length);
+        temp.materials.push({
+            id: matId,
+            part_id: 'beof_roof_1',
+            file_id: newId,
+            build_part: 'Roof',
+            mat_name: 'Screen tiles',
+            db: 'Molio',
+            mat_id: 'IDID2222',
+            quantity: 30,
+            unit: 'm2'
         })
         setCosts(temp);
+
         setRowData(loadTableData(costs));
         setTotalPrice(calculatePrice());
     }
@@ -122,9 +126,18 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         return id;
     }
 
+    const checkMaterialID = (id) => {
+        for (let i = 0; i < costs.materials.length; i++) {
+            if (id == costs.materials[i].id) {
+                id++;
+                return checkID(id)
+            }
+        }
+        return id;
+    }
+
     const deleteFile = (deletedFile) => {
-        console.log(deletedFile)
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: [] }
+        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: [], materials: [] }
         for (let i = 0; i < costs.files.length; i++) {
             let curFile = costs.files[i];
             if (curFile.id != deletedFile.id) {
@@ -132,9 +145,17 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             }
         }
 
+        for(let i = 0; i < costs.materials.length; i++) {
+            let curMat = costs.materials[i];
+            if(curMat.file_id != deletedFile.id) {
+                temp.materials.push(curMat);
+            }
+        }
+
         setCosts(temp);
         setRowData(loadTableData(temp));
         project.costs.find(cost => cost.id == costid).files = temp.files;
+        project.costs.find(cost => cost.id == costid).materials = temp.materials;
         setTotalPrice(calculatePrice());
     }
 

@@ -55,36 +55,36 @@ function App() {
             {
               id: 0,
               name: 'hindbærkræt-materials.csv',
-              materials: [
-                {
-                  part_id: 'beof_roof_1',
-                  build_part: 'Roof',
-                  mat_name: 'Screen tiles',
-                  db: 'Molio',
-                  mat_id: 'IDID2222',
-                  quantity: 30,
-                  unit: 'm2'
-                }
-              ]
             },
             {
               id: 1,
               name: 'hindbærkræt-materials1.csv',
-              materials: [
-                {
-                  part_id: 'beof_roof_2',
-                  build_part: 'Roof',
-                  mat_name: 'Screen tiles',
-                  db: 'Molio',
-                  mat_id: 'IDID2222',
-                  quantity: 30,
-                  unit: 'm2'
-                }
-              ]
             },
           ],
-          standAloneMaterials : [
-            {}
+          materials : [
+            {
+              id: 0,
+              part_id: 'beof_roof_1',
+              file_id: 0,
+              build_part: 'Roof',
+              mat_name: 'Screen tiles',
+              db: 'Molio',
+              mat_id: 'IDID2222',
+              quantity: 30,
+              unit: 'm2'
+            },
+            {
+              id: 1,
+              part_id: 'beof_roof_2',
+              file_id: 1,
+              build_part: 'Roof',
+              mat_name: 'Screen tiles',
+              db: 'Molio',
+              mat_id: 'IDID2222',
+              quantity: 30,
+              unit: 'm2'
+            },
+
           ]
         }
       ],
