@@ -847,7 +847,7 @@ code {
 .screening-model {
 
   width: 343px;
-  height: 595px;
+  height: 645px;
   left: 243px;
   top: 182px;
 
@@ -904,4 +904,16 @@ input[type="radio"]:checked {
   max-width: 47px;
   margin-top: -35px;
   margin-left: 8px;
+}
+
+.screening-model-picture {
+  display: flex;
+  justify-content: center;
+}
+
+.model-image {
+  
+  margin-top: 5px;
+  max-width: 250px;
+  max-height: 212px;
 }
