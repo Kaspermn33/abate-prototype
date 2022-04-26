@@ -26,7 +26,7 @@ const Dashboard = ({ onUpdate, projects, onSetCurrentProject }) => {
     
     for(let i = 0; i < projects.length; i++) {
       let project = projects[i];
-      if(project.name.toLowerCase().includes(search)) {
+      if(project.name.toLowerCase().includes(search.toLowerCase())) {
         tempProjects.push(project)
       }
     }

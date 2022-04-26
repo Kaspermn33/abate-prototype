@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaFolder } from 'react-icons/fa'
+import { FaRegFolder } from 'react-icons/fa'
 import { useNavigate, generatePath } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
@@ -40,7 +41,7 @@ const ProjectItem = ({ project, onUpdate }) => {
         placement="right"
         arrow
       >
-        <div className='project-item-container' onClick={onClick}><FaFolder className='project-item-icon'/> <h3 className='project-item-text' > {project.name}</h3></div>
+        <div className='project-item-container' onClick={onClick}><FaRegFolder className='project-item-icon'/> <p className='project-item-text' > {project.name}</p></div>
       </HtmlTooltip>
 
             

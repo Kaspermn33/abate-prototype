@@ -187,13 +187,17 @@ code {
 }
 
 .project-item-text {
+  font-size: 18px;
+  color: #1F384C;
   padding-left: 10px;
   padding-top: 0px;
   margin-top: 15px;
 }
 
 .project-item-icon {
-  padding-top: 7px;
+  font-size: 18px;
+  padding-top: 5px;
+  color: #1F384C;
 }
 
 
