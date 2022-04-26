@@ -2,7 +2,10 @@ import { FaFolder } from 'react-icons/fa'
 import { useParams } from 'react-router-dom';
 import BoxHeader from './BoxHeader';
 import RecentItem from './RecentItem';
-import {GrCycle} from 'react-icons/gr'
+import {FaRecycle} from 'react-icons/fa'
+import { VscGraph } from 'react-icons/vsc'
+import { BiCoinStack } from 'react-icons/bi'
+import {HiOutlineCog} from 'react-icons/hi'
 import { useNavigate, generatePath } from "react-router-dom";
 
 import Header from './Header'
@@ -130,12 +133,14 @@ const Project = ({ projects, onSetCurrentProject }) => {
       <Header title={project.name} />
       <div className='project'>
         <div>
-          <h1>Project</h1>
+          <h1 className='page-sub-header'>Project</h1>
         </div>
         <div className='project-main'>
           <div className='project-left'>
             <div className='screening-box'>
-              <h2>Screening</h2>
+              <div className='project-box-header'>
+                <VscGraph className='screening-box-header-icon'/><h2 className='project-box-header-text'>Screening</h2>
+              </div>
               <div className='box-type'>
                 <div className='new-box' onClick={onNewScreening}>
                   <BoxHeader title={"New"} />
@@ -143,7 +148,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
                 </div>
                 <div className='recent'>
                   <BoxHeader title={"Recent"} />
-                  <div>
+                  <div className='recent-screenings'>
                     {project.screenings.map(screening => (
                       <RecentItem key={screening.id} item={screening} type="screening"/>
                     ))}
@@ -153,7 +158,9 @@ const Project = ({ projects, onSetCurrentProject }) => {
 
             </div>
             <div className='LCA-box'>
-              <h2>LCA</h2>
+            <div className='project-box-header'>
+                <FaRecycle className='lca-box-header-icon'/><h2 className='project-box-header-text'>LCA</h2>
+              </div>
               <div className='box-type'>
                 <div className='new-box'>
                   <BoxHeader title={"New"} />
@@ -161,7 +168,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
                 </div>
                 <div className='recent'>
                   <BoxHeader title={"Recent"} />
-                  <div>
+                  <div className='recent-lca'>
                     {project.lca.map(lca => (
                       <div> 
                         <RecentItem key={lca.id} item={lca} type="lca"/>
@@ -177,7 +184,9 @@ const Project = ({ projects, onSetCurrentProject }) => {
           <div className='project-right'>
 
             <div className='costs-box'>
-              <h2>Costs</h2>
+            <div className='project-box-header'>
+                <BiCoinStack className='costs-box-header-icon'/><h2 className='project-box-header-text'>Costs</h2>
+              </div>
               <div className='box-type'>
                 <div className='new-box' onClick={onNewCosts}>
                   <BoxHeader title={"New"} />
@@ -194,7 +203,9 @@ const Project = ({ projects, onSetCurrentProject }) => {
               </div>
             </div>
             <div className='manageproject-box'>
-              <h2>Manage project</h2>
+            <div className='project-box-header'>
+                <HiOutlineCog className='manageproject-box-header-icon'/><h2 className='project-box-header-text'>Manage project</h2>
+              </div>
               <div className='manage-project-box' onClick={onUpdateProject}>
                 <BoxHeader title={"Make changes"} />
                 <div className='project-details'>

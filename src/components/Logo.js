@@ -6,7 +6,7 @@ const Logo = () => {
     <div className='logo-container'> 
       <img className='logo-image' src={logo} />
       <div>
-        <h3 className='logo-text'>Spot the ABATE Solutions Aps</h3>
+        <h3 className='logo-text'>ABATE</h3>
       </div>
       
     </div>

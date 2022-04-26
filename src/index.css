@@ -28,6 +28,7 @@ code {
   width: 100%;
   height: 87px;
   line-height: 80px;
+  max-height: 88px;
   position: aboslute;
 }
 
@@ -41,16 +42,14 @@ code {
 .logo-text {
   padding-left: 20px;
   width: 150px;
-  font-size: 1.17em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  font-size: 48px;
+  margin-top: 10px;
   font-weight: bold;
 }
 
 .header-title {
   padding-left: 20px;
+  font-size: 36px;
 }
 
 .main-body {
@@ -136,8 +135,54 @@ code {
   border-radius: 6px;
 }
 
+.page-sub-header {
+  font-size: 40px;
+  line-height: 40px; 
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
 .projects-body {
   margin-top: -10px;
+}
+
+.project-box-header {
+  display: flex;
+}
+
+.screening-box-header-icon {
+  margin-top: 7px;
+  font-size: 38px;
+  color: #1858A8;
+}
+
+.costs-box-header-icon {
+  margin-left: -4px;
+  margin-top: 2px;
+  font-size: 44px;
+  color: #1858A8;
+}
+
+.lca-box-header-icon {
+  margin-left: 2px;
+  margin-top: 7px;
+  font-size: 38px;
+  color: #1858A8;
+}
+
+.manageproject-box-header-icon {
+  margin-top: 0px;
+  font-size: 46px;
+  color: #1858A8;
+}
+
+.project-box-header-text {
+  margin-left: 25px;
+  margin-top: 0px;
+  margin-bottom: 14px;
+  font-size: 48px;
+  line-height: 40px;
+  color: #1858A8;
 }
 
 .box-header {
@@ -155,11 +200,11 @@ code {
 .small-box-header {
   font-size: 32px;
   font-family: 'Poppins';
-  height: 63px;
+  height: 56px;
   max-height:63px;
   margin-top: 0px;
   margin-bottom: 0px;;
-  padding-top:0px;
+  padding-top:5px;
   padding-bottom:0px;
   text-align: center;
   background-color: #1858A8;
@@ -269,7 +314,7 @@ code {
 }
 
 .project-name {
-  margin-top: 0px;
+  margin-top: 18px;
   margin-bottom: 0px;
   margin-left: 20px;
 }
@@ -323,18 +368,18 @@ code {
 .costs-box {
   width: 707px;
   height: 316px;
-  margin-left: 141px;
+  margin-left: 90px;
 }
 .LCA-box {
   width: 707px;
   height: 316px;
-  margin-top: 138px;
+  margin-top: 20px;
 }
 .manageproject-box {
   width: 707px;
   height: 316px;
-  margin-left: 141px;
-  margin-top: 138px;
+  margin-left: 90px;
+  margin-top: 20px;
   margin-bottom: 0px;
 }
 
@@ -364,6 +409,16 @@ code {
 }
 
 .recent-costs {
+  overflow-y: scroll;
+  height: 189px;
+}
+
+.recent-lca {
+  overflow-y: scroll;
+  height: 189px;
+}
+
+.recent-screenings {
   overflow-y: scroll;
   height: 189px;
 }
