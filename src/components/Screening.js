@@ -20,7 +20,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
 
   const updateScreeningName = (e) => {
     setScreeningName(e);
-    let temp = { id: screeningid, name: e, lastEdit: screening.lastEdit, buildingId: screening.buildingId }
+    let temp = { id: screeningid, name: e, lastEdit: screening.lastEdit, buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
     setScreening(temp)
     project.screenings.find(screening => screening.id == screeningid).name = e;
 
@@ -41,6 +41,39 @@ const Screening = ({ projects, onSetCurrentProject }) => {
   const updateSelectedBuilding = (e) => {
     setBuilding(e);
     screening.buildingId = e;
+  }
+
+  const updateScreening = (modelName, updatedMaterials) => {
+    let temp = { id: screeningid, name: screening.name, lastEdit: screening.lastEdit, buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
+    switch (modelName) {
+      case "Model 1":
+        temp.model1 = updatedMaterials;
+        project.screenings.find(screening => screening.id == screeningid).model1 = updatedMaterials;
+        break;
+      case "Model 2":
+        temp.model2 = updatedMaterials;
+        project.screenings.find(screening => screening.id == screeningid).model2 = updatedMaterials;
+        break;
+      case "Model 3":
+        temp.model3 = updatedMaterials;
+        project.screenings.find(screening => screening.id == screeningid).model3 = updatedMaterials;
+        break;
+    }
+    setScreening(temp)
+    
+    
+    let tempProject = {
+      id: project.id,
+      name: project.name,
+      description: project.description,
+      lastEdit: project.lastEdit,
+      contributors: project.contributors,
+      screenings: project.screenings,
+      lca: project.lca,
+      costs: project.costs,
+      buildings: project.buildings
+    }
+    onSetCurrentProject(tempProject);
   }
 
 
@@ -106,17 +139,17 @@ const Screening = ({ projects, onSetCurrentProject }) => {
           <div className='screening-models'>
             <div className='screening-model'>
               <div className='model-1'>
-                <ScreeningModel title={screening.model1.name} />
+                <ScreeningModel title={screening.model1.name} materialSelection={screening.model1.materialSelection} onUpdateScreening={updateScreening}/>
               </div>
             </div>
             <div className='screening-model'>
               <div className='model-2'>
-                <ScreeningModel title={screening.model2.name} />
+                <ScreeningModel title={screening.model2.name} materialSelection={screening.model2.materialSelection} onUpdateScreening={updateScreening}/>
               </div>
             </div>
             <div className='screening-model'>
               <div className='model-3'>
-                <ScreeningModel title={screening.model3.name} />
+                <ScreeningModel title={screening.model3.name} materialSelection={screening.model3.materialSelection} onUpdateScreening={updateScreening}/>
               </div>
             </div>
           </div>

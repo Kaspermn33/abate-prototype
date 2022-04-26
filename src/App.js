@@ -38,13 +38,34 @@ function App() {
           lastEdit: 'April 6th',
           buildingId: 0,
           model1: {
-            name: "Model 1"
+            name: "Model 1",
+            materialSelection: {
+              outerWallBearing: "CLT",
+              outerWallFacade: "metal",
+              innerWall: "plaster",
+              roofBearing: "CLT",
+              roofingMaterial: "wood",
+            }
           },
           model2: {
-            name: "Model 2"
+            name: "Model 2",
+            materialSelection: {
+              outerWallBearing: "",
+              outerWallFacade: "",
+              innerWall: "",
+              roofBearing: "",
+              roofingMaterial: "",
+            }
           },
           model3: {
-            name: "Model 3"
+            name: "Model 3",
+            materialSelection: {
+              outerWallBearing: "",
+              outerWallFacade: "",
+              innerWall: "",
+              roofBearing: "",
+              roofingMaterial: "",
+            }
           },
         }
       ],

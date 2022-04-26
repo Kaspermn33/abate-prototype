@@ -3,30 +3,45 @@ import modelPic from './model.png';
 import noModelPic from './no-model.png';
 
 
-const ScreeningModel = ({ title }) => {
-    let [outerWallBearing, setOuterWallBearing] = useState("CLT")
-    let [outerWallFacade, setOuterWallFacade] = useState()
-    let [innerWall, setInnerWall] = useState()
-    let [roofBearing, setRoofBearing] = useState()
-    let [roofingMaterial, setRoofingMaterial] = useState()
+const ScreeningModel = ({ title, materialSelection, onUpdateScreening }) => {
+    let [outerWallBearing, setOuterWallBearing] = useState(materialSelection.outerWallBearing)
+    let [outerWallFacade, setOuterWallFacade] = useState(materialSelection.outerWallFacade)
+    let [innerWall, setInnerWall] = useState(materialSelection.innerWall)
+    let [roofBearing, setRoofBearing] = useState(materialSelection.roofBearing)
+    let [roofingMaterial, setRoofingMaterial] = useState(materialSelection.roofingMaterial)
     
     const areAllSelected = () => {
         return (
-            outerWallBearing != undefined &&
-            outerWallFacade != undefined &&
-            innerWall != undefined &&
-            roofBearing != undefined &&
-            roofingMaterial != undefined
+            outerWallBearing != "" &&
+            outerWallFacade != "" &&
+            innerWall != "" &&
+            roofBearing != "" &&
+            roofingMaterial != ""
         )
     }
+
+    console.log(materialSelection)
     
     let [allSelected, setAllSelected] = useState(areAllSelected)
+
+    const createMaterialSelection = () => {
+        return {
+            name: title,
+            materialSelection: {
+            outerWallBearing: outerWallBearing,
+            outerWallFacade: outerWallFacade,
+            innerWall: innerWall,
+            roofBearing: roofBearing,
+            roofingMaterial: roofingMaterial,
+        }}
+    }
 
     const handleOWChange = (event) => {
         outerWallBearing = event.target.value;
         setOuterWallBearing(event.target.value)
         console.log(outerWallBearing)
         setAllSelected(areAllSelected);
+        onUpdateScreening(title, createMaterialSelection())
     }
 
     const handleOFChange = (event) => {
@@ -34,6 +49,7 @@ const ScreeningModel = ({ title }) => {
         setOuterWallFacade(event.target.value)
         console.log(outerWallFacade)
         setAllSelected(areAllSelected);
+        onUpdateScreening(title, createMaterialSelection())
     }
 
     const handleInChange = (event) => {
@@ -41,6 +57,7 @@ const ScreeningModel = ({ title }) => {
         setInnerWall(event.target.value)
         console.log(innerWall)
         setAllSelected(areAllSelected);
+        onUpdateScreening(title, createMaterialSelection())
     }
 
     const handleRBChange = (event) => {
@@ -48,6 +65,7 @@ const ScreeningModel = ({ title }) => {
         setRoofBearing(event.target.value)
         console.log(roofBearing)
         setAllSelected(areAllSelected);
+        onUpdateScreening(title, createMaterialSelection())
     }
 
     const handleRMChange = (event) => {
@@ -55,6 +73,7 @@ const ScreeningModel = ({ title }) => {
         setRoofingMaterial(event.target.value)
         console.log(roofingMaterial)
         setAllSelected(areAllSelected);
+        onUpdateScreening(title, createMaterialSelection())
     }
 
 
