@@ -141,6 +141,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
               </div>
             </div>
             <div className='all-models-picture-container'>
+              <h2 className='all-models-header-text'>Model comparison</h2>
               <img className='all-models-image' src={allModelsPic} />
             </div>
           </div>
