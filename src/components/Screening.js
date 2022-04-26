@@ -5,6 +5,8 @@ import { BiCog } from 'react-icons/bi'
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./foo.module.scss";
 import ScreeningModel from './ScreeningModel';
+import allModelsPic from './all-models.png';
+import noAllModelsPic from './no-all-models.png';
 
 const Screening = ({ projects, onSetCurrentProject }) => {
   const { id, screeningid } = useParams()
@@ -36,6 +38,10 @@ const Screening = ({ projects, onSetCurrentProject }) => {
     onSetCurrentProject(tempProject);
   }
 
+  const updateSelectedBuilding = (e) => {
+    setBuilding(e);
+    screening.buildingId = e;
+  }
 
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -77,20 +83,41 @@ const Screening = ({ projects, onSetCurrentProject }) => {
             </div>
           </div>
         </div>
-        <div className='screening-models'>
-          <div className='screening-model'>
-            <div className='model-1'>
-              <ScreeningModel title={screening.model1.name}/>
+        <div className='screening-body'>
+          <div>
+            <div>
+              <select className='screening-building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
+                {project.buildings.map(building => (
+                  <option value={building.id}>{building.name}</option>
+                ))}
+              </select>
+              <div className='screening-building-details'>
+                <div>
+                  <p className='screening-building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
+                  <p className='screening-building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
+                  <p className='screening-building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                </div>
+              </div>
+            </div>
+            <div className='all-models-picture-container'>
+              <img className='all-models-image' src={allModelsPic} />
             </div>
           </div>
-          <div className='screening-model'>
-            <div className='model-2'>
-              <ScreeningModel title={screening.model2.name}/>
+          <div className='screening-models'>
+            <div className='screening-model'>
+              <div className='model-1'>
+                <ScreeningModel title={screening.model1.name} />
+              </div>
             </div>
-          </div>
-          <div className='screening-model'>
-            <div className='model-3'>
-            <ScreeningModel title={screening.model3.name}/>
+            <div className='screening-model'>
+              <div className='model-2'>
+                <ScreeningModel title={screening.model2.name} />
+              </div>
+            </div>
+            <div className='screening-model'>
+              <div className='model-3'>
+                <ScreeningModel title={screening.model3.name} />
+              </div>
             </div>
           </div>
         </div>
