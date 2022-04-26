@@ -1,7 +1,12 @@
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { FaGem, FaHeart } from 'react-icons/fa'
+import { FaGem, FaRegFolder, FaRecycle } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
+import { VscGraph } from 'react-icons/vsc'
+import { BiCoinStack, BiLogOut } from 'react-icons/bi'
+import { HiOutlineCog, HiOutlineInformationCircle } from 'react-icons/hi'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { MdDashboard } from 'react-icons/md'
 import './Navbar.scss'
 import Header from './Header';
 import Logo from './Logo';
@@ -19,24 +24,24 @@ const Navbar = ({project}) => {
             <Logo/>
         <ProSidebar> 
 
-            <p>MENU</p>
+            <p className='navbar-section-text'>MENU</p>
                 <Menu iconShape="square">
-                    <MenuItem icon={<FaGem />}>Dashboard  <Link to="/" /></MenuItem>
+                    <MenuItem icon={<MdDashboard />}>Dashboard  <Link to="/" /></MenuItem>
                     {project == undefined ? <div></div>
                     :
                     <div>
-                    <MenuItem icon={<FaGem />}>{project.name} <Link to={"/project/" + project.id} /></MenuItem>
-                    <SubMenu title="Screening" icon={<FaHeart />}>
+                    <MenuItem icon={<FaRegFolder />}>{project.name} <Link to={"/project/" + project.id} /></MenuItem>
+                    <SubMenu title="Screening" icon={<VscGraph />}>
                         {project.screenings.map(screening => (
                             <MenuItem key={screening.id}>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu >
-                    <SubMenu title="Cost" icon={<FaHeart />}>
+                    <SubMenu title="Cost" icon={<BiCoinStack />}>
                     {project.costs.map(cost => (
                             <MenuItem key={cost.id}>{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
                         ))}
                     </SubMenu>
-                    <SubMenu title="LCA" icon={<FaHeart />}>
+                    <SubMenu title="LCA" icon={<FaRecycle />}>
                     {project.lca.map(lca => (
                             <MenuItem key={lca.id}>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
                         ))}
@@ -44,16 +49,13 @@ const Navbar = ({project}) => {
                     </div>
                     }
                 </Menu>
-            <p>OTHERS</p>
+            <p className='navbar-section-text-others'>OTHERS</p>
             <Menu iconShape="square">
-                <MenuItem icon={<FaGem />}>Settings <Link to="/" /></MenuItem>
-                <MenuItem icon={<FaGem />}>Account <Link to="/" /></MenuItem>
-                <MenuItem icon={<FaGem />}>Help <Link to="/" /></MenuItem>
-                <MenuItem icon={<FaGem />}>Sign out <Link to="/" /></MenuItem>
+                <MenuItem icon={<HiOutlineCog />}>Settings <Link to="/" /></MenuItem>
+                <MenuItem icon={<BsFillPersonFill />}>Account <Link to="/" /></MenuItem>
+                <MenuItem icon={<HiOutlineInformationCircle />}>Help <Link to="/" /></MenuItem>
+                <MenuItem icon={<BiLogOut />}>Sign out <Link to="/" /></MenuItem>
             </Menu>
-            <SidebarFooter>
-                {<p>Copyright</p>}
-            </SidebarFooter>
         </ProSidebar></div>
     )
 }
