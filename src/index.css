@@ -598,6 +598,7 @@ code {
 }
 
 .costs-files {
+  margin-top: 2px;
   margin-bottom: 20px;
   width: 952px;
   height: 100px;
@@ -838,8 +839,11 @@ code {
 }
 
 .screening-header {
-  justify-content:space-between;
   display: flex;
+}
+
+.screening-header-right {
+  margin-left: 945px;
 }
 
 .screening-models {
