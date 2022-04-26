@@ -21,12 +21,18 @@ const Project = ({ projects, onSetCurrentProject }) => {
 
   onSetCurrentProject(project);
 
+  const getDate = () => {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var today = new Date();
+    return months[today.getMonth()] + " " + today.getDate();
+  }
+
   const onNewCosts = () => {
     let newId = checkCostID(project.costs.length)
     let temp = {
       id: newId,
       name: 'New cost estimation' + newId,
-      lastEdit: 'April 6th',
+      lastEdit: getDate(),
       buildingId: 0, 
       files: [],
       materials : []
@@ -37,7 +43,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
       id: project.id,
       name: project.name,
       description: project.description,
-      lastEdit: project.lastEdit,
+      lastEdit: getDate(),
       contributors: project.contributors,
       screenings: project.screenings,
       lca: project.lca,
@@ -55,7 +61,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
     let temp = {
       id: newId,
       name: 'Screening ' + newId,
-      lastEdit: 'April 6th',
+      lastEdit: getDate(),
       buildingId: 0,
       model1: {
         name: "Model 1",
@@ -94,7 +100,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
       id: project.id,
       name: project.name,
       description: project.description,
-      lastEdit: project.lastEdit,
+      lastEdit: getDate(),
       contributors: project.contributors,
       screenings: project.screenings,
       lca: project.lca,

@@ -20,7 +20,7 @@ function App() {
       id: 0,
       name: 'Hindbærkrattet 1',
       description: 'Placeholder description',
-      lastEdit: 'April 4th',
+      lastEdit: 'April 4',
       contributors: [
         {
           id: 0,
@@ -35,7 +35,7 @@ function App() {
         {
           id: 0,
           name: 'Screening',
-          lastEdit: 'April 6th',
+          lastEdit: 'April 6',
           buildingId: 0,
           model1: {
             name: "Model 1",
@@ -73,14 +73,14 @@ function App() {
         {
           id: 0,
           name: 'lca 1',
-          lastEdit: 'April 6th',
+          lastEdit: 'April 6',
         }
       ],
       costs: [
         {
           id: 0,
           name: 'cost 1',
-          lastEdit: 'April 6th',
+          lastEdit: 'April 6',
           buildingId: 1, 
           files: [
             {
@@ -140,7 +140,7 @@ function App() {
       id: 1,
       name: 'Hindbærkrattet 2',
       description: 'Placeholder description',
-      lastEdit: 'April 4th',
+      lastEdit: 'April 4',
       contributors: [
         {
           id: 0,
@@ -155,14 +155,14 @@ function App() {
         {
           id: 0,
           name: 'Screening 1',
-          lastEdit: 'April 6th',
+          lastEdit: 'April 6',
         }
       ],
       lca: [
         {
           id: 0,
           name: 'lca 1',
-          lastEdit: 'April 6th',
+          lastEdit: 'April 6',
         }
       ],
       costs: [

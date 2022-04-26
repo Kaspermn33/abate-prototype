@@ -161,6 +161,7 @@ const UpdateProject = ({ projects, onUpdateProject }) => {
     const [projectDescription, setprojectDescription] = useState(project.description);
 
     const navigate = useNavigate();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const updateProject = () => {
         var today = new Date();
 
@@ -168,7 +169,7 @@ const UpdateProject = ({ projects, onUpdateProject }) => {
             id: project.id,
             name: projectName,
             description: projectDescription,
-            lastEdit: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+            lastEdit: months[today.getMonth()] + " " + today.getDate(),
             contributors: rowData1
             ,
             screenings: [],

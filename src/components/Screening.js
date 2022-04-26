@@ -20,7 +20,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
 
   const updateScreeningName = (e) => {
     setScreeningName(e);
-    let temp = { id: screeningid, name: e, lastEdit: screening.lastEdit, buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
+    let temp = { id: screeningid, name: e, lastEdit: getDate(), buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
     setScreening(temp)
     project.screenings.find(screening => screening.id == screeningid).name = e;
 
@@ -28,7 +28,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
       id: project.id,
       name: project.name,
       description: project.description,
-      lastEdit: project.lastEdit,
+      lastEdit: getDate(),
       contributors: project.contributors,
       screenings: project.screenings,
       lca: project.lca,
@@ -46,13 +46,19 @@ const Screening = ({ projects, onSetCurrentProject }) => {
     }   
   })
 
+  const getDate = () => {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var today = new Date();
+    return months[today.getMonth()] + " " + today.getDate();
+  }
+
   const updateSelectedBuilding = (e) => {
     setBuilding(e);
     screening.buildingId = e;
   }
 
   const updateScreening = (modelName, updatedMaterials) => {
-    let temp = { id: screeningid, name: screening.name, lastEdit: screening.lastEdit, buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
+    let temp = { id: screeningid, name: screening.name, lastEdit: getDate(), buildingId: screening.buildingId, model1: screening.model1, model2: screening.model2, model3: screening.model3 }
     switch (modelName) {
       case "Model 1":
         temp.model1 = updatedMaterials;
@@ -74,7 +80,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
       id: project.id,
       name: project.name,
       description: project.description,
-      lastEdit: project.lastEdit,
+      lastEdit: getDate(),
       contributors: project.contributors,
       screenings: project.screenings,
       lca: project.lca,

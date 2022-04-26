@@ -6,9 +6,7 @@ import { useState } from "react";
 
 const Dashboard = ({ onUpdate, projects, onSetCurrentProject }) => {
   const navigate = useNavigate();
-  const onClick = () => {
-    //onUpdate(true);
-  }
+
 
   onSetCurrentProject();
 
@@ -46,7 +44,7 @@ const Dashboard = ({ onUpdate, projects, onSetCurrentProject }) => {
               <div>
                 <h2 className='box-header'>Recent Projects</h2>
                 <div className='projects-body'>
-                  {projects.map(project => (
+                  {projects.slice(0,6).map(project => (
                     <ProjectItem key={project.id} project={project} onUpdate={onUpdate} recent={true} />
                   ))}
                 </div>

@@ -57,11 +57,15 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             setTotalPrice(calculatePrice())
             setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
         }   
-    })
+    }) 
 
     
 
-
+    const getDate = () => {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var today = new Date();
+        return months[today.getMonth()] + " " + today.getDate();
+    }
     
 
     const updateSelectedBuilding = (e) => {
@@ -71,7 +75,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
     const updateCostsName = (e) => {
         setCostsName(e);
-        let temp = { id: costid, name: e, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
+        let temp = { id: costid, name: e, lastEdit: getDate(), buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
         setCosts(temp)
         project.costs.find(cost => cost.id == costid).name = e;
 
@@ -79,7 +83,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             id: project.id,
             name: project.name,
             description: project.description,
-            lastEdit: project.lastEdit,
+            lastEdit: getDate(),
             contributors: project.contributors,
             screenings: project.screenings,
             lca: project.lca,
@@ -90,7 +94,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     }
 
     const onUploadFile = () => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
+        let temp = { id: costid, name: costs.name, lastEdit: getDate(), buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
         var newId = checkID(costs.files.length);
         temp.files.push({
             id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv'
@@ -136,7 +140,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     }
 
     const deleteFile = (deletedFile) => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: [], materials: [] }
+        let temp = { id: costid, name: costs.name, lastEdit: getDate(), buildingId: costs.buildingId, files: [], materials: [] }
         for (let i = 0; i < costs.files.length; i++) {
             let curFile = costs.files[i];
             if (curFile.id != deletedFile.id) {
@@ -159,7 +163,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     }
 
     const addRow = () => {
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
+        let temp = { id: costid, name: costs.name, lastEdit: getDate(), buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
         
 
         let matId = checkMaterialID(costs.materials.length);
@@ -198,7 +202,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             }
         }
 
-        let temp = { id: costid, name: costs.name, lastEdit: costs.lastEdit, buildingId: costs.buildingId, files: costs.files, materials: filteredData }
+        let temp = { id: costid, name: costs.name, lastEdit: getDate(), buildingId: costs.buildingId, files: costs.files, materials: filteredData }
 
         setCosts(temp);
         setRowData(loadTableData(temp));

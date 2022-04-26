@@ -143,6 +143,8 @@ const NewProject = ({ projects, onAddProject }) => {
     const [projectDescription, setprojectDescription] = useState("");
 
     const navigate = useNavigate();
+
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const createProject = () => {
         console.log(projects.length)
         var newId = checkID(projects.length);
@@ -155,7 +157,7 @@ const NewProject = ({ projects, onAddProject }) => {
             id: newId,
             name: projectName,
             description: projectDescription,
-            lastEdit: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+            lastEdit: months[today.getMonth()] + " " + today.getDate(),
             contributors: rowData1
             ,
             screenings: [],
