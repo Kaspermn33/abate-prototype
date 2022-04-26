@@ -46,6 +46,64 @@ const Project = ({ projects, onSetCurrentProject }) => {
     navigate(generatePath('cost/' + newId))
   }
 
+  const onNewScreening = () => {
+    let newId = checkScreeningID(project.screenings.length)
+
+    let temp = {
+      id: newId,
+      name: 'Screening ' + newId,
+      lastEdit: 'April 6th',
+      buildingId: 0,
+      model1: {
+        name: "Model 1",
+        materialSelection: {
+          outerWallBearing: "",
+          outerWallFacade: "",
+          innerWall: "",
+          roofBearing: "",
+          roofingMaterial: "",
+        }
+      },
+      model2: {
+        name: "Model 2",
+        materialSelection: {
+          outerWallBearing: "",
+          outerWallFacade: "",
+          innerWall: "",
+          roofBearing: "",
+          roofingMaterial: "",
+        }
+      },
+      model3: {
+        name: "Model 3",
+        materialSelection: {
+          outerWallBearing: "",
+          outerWallFacade: "",
+          innerWall: "",
+          roofBearing: "",
+          roofingMaterial: "",
+        }
+      },
+    }
+    project.screenings.push(temp)
+
+    let tempProject = {
+      id: project.id,
+      name: project.name,
+      description: project.description,
+      lastEdit: project.lastEdit,
+      contributors: project.contributors,
+      screenings: project.screenings,
+      lca: project.lca,
+      costs: project.costs,
+      buildings: project.buildings
+    }
+    project = tempProject;
+    onSetCurrentProject(tempProject);
+    navigate(generatePath('screening/' + newId))
+
+  }
+
 
   const checkCostID = (id) => {
     for (let i = 0; i < project.costs.length; i++) {
@@ -55,7 +113,17 @@ const Project = ({ projects, onSetCurrentProject }) => {
         }
     }
     return id;
-}
+  }
+
+  const checkScreeningID = (id) => {
+    for (let i = 0; i < project.screenings.length; i++) {
+        if (id == project.screenings[i].id) {
+            id++;
+            return checkScreeningID(id)
+        }
+    }
+    return id;
+  }
 
   return (
     <div className='main-body'>
@@ -69,7 +137,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
             <div className='screening-box'>
               <h2>Screening</h2>
               <div className='box-type'>
-                <div className='new-box'>
+                <div className='new-box' onClick={onNewScreening}>
                   <BoxHeader title={"New"} />
                   <p className='project-text'>Creates a new empty carbon footprint-screening estimation</p>
                 </div>

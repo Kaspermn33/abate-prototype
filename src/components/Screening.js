@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import Header from './Header'
 import { BiCog } from 'react-icons/bi'
@@ -37,6 +37,14 @@ const Screening = ({ projects, onSetCurrentProject }) => {
     }
     onSetCurrentProject(tempProject);
   }
+
+  useEffect(() => {
+    setScreening(project.screenings.find(screening => screening.id == screeningid))
+    if(screening.id != project.screenings.find(screening => screening.id == screeningid).id ) {
+        setScreeningName(project.screenings.find(screening => screening.id == screeningid).name)
+        setBuilding(project.screenings.find(screening => screening.id == screeningid).buildingId)
+    }   
+  })
 
   const updateSelectedBuilding = (e) => {
     setBuilding(e);

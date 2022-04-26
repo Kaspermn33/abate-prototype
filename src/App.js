@@ -34,7 +34,7 @@ function App() {
       screenings: [
         {
           id: 0,
-          name: 'Screening 1',
+          name: 'Screening',
           lastEdit: 'April 6th',
           buildingId: 0,
           model1: {
@@ -187,11 +187,9 @@ function App() {
 
   const onSetCurrentProject = (project) => {
     setCurrentProject(project)
-    console.log("DASHBOARD", project)
   }
 
   const onSetProjectSelected = (b) => {
-    console.log("should update")
     setProjectSelected(b);
   }
 
