@@ -33,17 +33,17 @@ const Navbar = ({project}) => {
                     <MenuItem icon={<FaRegFolder />}>{project.name} <Link to={"/project/" + project.id} /></MenuItem>
                     <SubMenu title="Screening" icon={<VscGraph />}>
                         {project.screenings.map(screening => (
-                            <MenuItem key={screening.id}>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
+                            <MenuItem icon={<VscGraph />} key={screening.id}>{screening.name} <Link to={"/project/" + project.id +"/screening/" + screening.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu >
                     <SubMenu title="Cost" icon={<BiCoinStack />}>
                     {project.costs.map(cost => (
-                            <MenuItem key={cost.id}>{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
+                            <MenuItem icon={<BiCoinStack />} key={cost.id}>{cost.name}  <Link to={"/project/" + project.id + "/cost/" + cost.id} onClick={costNavigate(cost)}/> </MenuItem>
                         ))}
                     </SubMenu>
                     <SubMenu title="LCA" icon={<FaRecycle />}>
                     {project.lca.map(lca => (
-                            <MenuItem key={lca.id}>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
+                            <MenuItem icon={<FaRecycle />} key={lca.id}>{lca.name} <Link to={"/project/" + project.id + "/lca/" + lca.id.toString()} /> </MenuItem>
                         ))}
                     </SubMenu>
                     </div>
@@ -51,10 +51,10 @@ const Navbar = ({project}) => {
                 </Menu>
             <p className='navbar-section-text-others'>OTHERS</p>
             <Menu iconShape="square">
-                <MenuItem icon={<HiOutlineCog />}>Settings <Link to="/" /></MenuItem>
-                <MenuItem icon={<BsFillPersonFill />}>Account <Link to="/" /></MenuItem>
-                <MenuItem icon={<HiOutlineInformationCircle />}>Help <Link to="/" /></MenuItem>
-                <MenuItem icon={<BiLogOut />}>Sign out <Link to="/" /></MenuItem>
+                <MenuItem icon={<HiOutlineCog />}>Settings </MenuItem>
+                <MenuItem icon={<BsFillPersonFill />}>Account </MenuItem>
+                <MenuItem icon={<HiOutlineInformationCircle />}>Help </MenuItem>
+                <MenuItem icon={<BiLogOut />}>Sign out </MenuItem>
             </Menu>
         </ProSidebar></div>
     )

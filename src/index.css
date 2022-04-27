@@ -963,7 +963,7 @@ code {
 }
 
 .material-radio-button input[type="radio"] {
-  background-color: #C4C4C4;
+  background-color: #dfdfdf;
   height: 35px;
   width: 53px;
   -webkit-appearance: none;
