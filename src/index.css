@@ -27,12 +27,23 @@ code {
 .navbar-section-text {
   margin-left: 30px;
   margin-bottom: 0px;
+  color: rgb(114, 114, 114);
 }
 
 .navbar-section-text-others {
   margin-left: 30px;
   margin-top: 0px;
   margin-bottom: 0px;
+  color: rgb(114, 114, 114);
+}
+
+.pro-item-content {
+  color: rgb(114, 114, 114);
+}
+
+.pro-icon {
+  color: rgb(114, 114, 114);
+  font-size: 18px;
 }
 
 .header {
@@ -62,6 +73,7 @@ code {
   height: 90px;
   padding-left: 20px;
   font-size: 36px;
+  color: black;
 }
 
 .main-body {
