@@ -11,6 +11,7 @@ import FileRow from './FileRow';
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./foo.module.scss";
 import { AiOutlineUserAdd, AiOutlineUserDelete, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import Changelog from './Changelog'
 
 
 const Costs = ({ projects, onSetCurrentProject }) => {
@@ -20,26 +21,26 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     const [buildingId, setBuilding] = useState(costs.buildingId);
     const [costsName, setCostsName] = useState(costs.name)
     const calculatePrice = () => {
-        if(project.costs.find(cost => cost.id == costid).materials.length != (0 || undefined)) {
+        if (project.costs.find(cost => cost.id == costid).materials.length != (0 || undefined)) {
             return project.costs.find(cost => cost.id == costid).materials.length * 500000;
         }
         else {
             return 0;
         }
-        
+
     }
     const [totalPrice, setTotalPrice] = useState(calculatePrice());
     let initialRowData = []
     const loadTableData = (input) => {
         let data = [];
 
-        if(input.materials.length != 0) {
-            for(let i = 0; i< input.materials.length; i++) {
+        if (input.materials.length != 0) {
+            for (let i = 0; i < input.materials.length; i++) {
                 let curMat = input.materials[i];
                 data.push(curMat);
             }
         }
-        return data; 
+        return data;
     }
 
     initialRowData = loadTableData(costs);
@@ -50,23 +51,23 @@ const Costs = ({ projects, onSetCurrentProject }) => {
     //This is a mess, somehow costs was one behind, but this works
     useEffect(() => {
         setCosts(project.costs.find(cost => cost.id == costid))
-        if(costs.id != project.costs.find(cost => cost.id == costid).id ) {
-            
+        if (costs.id != project.costs.find(cost => cost.id == costid).id) {
+
             setCostsName(project.costs.find(cost => cost.id == costid).name)
             setBuilding(project.costs.find(cost => cost.id == costid).buildingId)
             setTotalPrice(calculatePrice())
             setRowData(loadTableData(project.costs.find(cost => cost.id == costid)))
-        }   
-    }) 
+        }
+    })
 
-    
+
 
     const getDate = () => {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var today = new Date();
         return months[today.getMonth()] + " " + today.getDate();
     }
-    
+
 
     const updateSelectedBuilding = (e) => {
         setBuilding(e);
@@ -79,7 +80,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         setCosts(temp)
         project.costs.find(cost => cost.id == costid).name = e;
 
-        let tempProject = { 
+        let tempProject = {
             id: project.id,
             name: project.name,
             description: project.description,
@@ -89,7 +90,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             lca: project.lca,
             costs: project.costs,
             buildings: project.buildings
-          }
+        }
         onSetCurrentProject(tempProject);
     }
 
@@ -99,7 +100,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         temp.files.push({
             id: newId, name: 'hindbærkræt-materials' + costs.files.length + '.csv'
         })
-        
+
 
         let matId = checkMaterialID(costs.materials.length);
         temp.materials.push({
@@ -148,9 +149,9 @@ const Costs = ({ projects, onSetCurrentProject }) => {
             }
         }
 
-        for(let i = 0; i < costs.materials.length; i++) {
+        for (let i = 0; i < costs.materials.length; i++) {
             let curMat = costs.materials[i];
-            if(curMat.file_id != deletedFile.id) {
+            if (curMat.file_id != deletedFile.id) {
                 temp.materials.push(curMat);
             }
         }
@@ -164,7 +165,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
     const addRow = () => {
         let temp = { id: costid, name: costs.name, lastEdit: getDate(), buildingId: costs.buildingId, files: costs.files, materials: costs.materials }
-        
+
 
         let matId = checkMaterialID(costs.materials.length);
         temp.materials.push({
@@ -184,7 +185,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         setTotalPrice(calculatePrice());
     };
 
-    const deleteRow =() => {
+    const deleteRow = () => {
         const selectedRowNodes = gridRef.current.api.getSelectedNodes();
 
         const selectedIds = selectedRowNodes.map(function (rowNode) {
@@ -265,12 +266,12 @@ const Costs = ({ projects, onSetCurrentProject }) => {
         gridRef.current.api.setFilterModel(null);
     }, []);
 
-    
 
-    
 
-    
-    
+
+
+
+
 
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -295,101 +296,102 @@ const Costs = ({ projects, onSetCurrentProject }) => {
 
 
     return (
-        <div>
+        <div className='main-body'>
             <Header title={project.name} />
-            <div className='costs'>
-                <div className='costs-header'>
-                    <input className='costs-header-name' type='text' value={costsName} onChange={(e) => updateCostsName(e.target.value)} />
-                    <div className='costs-header-right'>
-                        <div>
-                            <Dropdown className={styles.bootstrap}>
-                                <Dropdown.Toggle as={CustomToggle} />
-                                <Dropdown.Menu size="sm" title="bla">
-                                    <Dropdown.Item onClick={() => exportEstimation()}>Export</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => deleteEstimation()}>Delete</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => renameEstimation()}>Rename</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </div>
+            <div className='costs-container'>
+                <div className='costs'>
+                    <div className='costs-header'>
+                        <input className='costs-header-name' type='text' value={costsName} onChange={(e) => updateCostsName(e.target.value)} />
+                        <div className='costs-header-right'>
+                            <div>
+                                <Dropdown className={styles.bootstrap}>
+                                    <Dropdown.Toggle as={CustomToggle} />
+                                    <Dropdown.Menu size="sm" title="bla">
+                                        <Dropdown.Item onClick={() => exportEstimation()}>Export</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => deleteEstimation()}>Delete</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => renameEstimation()}>Rename</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <div className='costs-body'>
-                    <div className='costs-row-one'>
-                        <div>
-                            <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
-                                {project.buildings.map(building => (
-                                    <option value={building.id}>{building.name}</option>
-                                ))}
-                            </select>
-                            <div className='costs-building-details'>
-                                <div>
-                                    <p className='building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
-                                    <p className='building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
-                                    <p className='building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                    <div className='costs-body'>
+                        <div className='costs-row-one'>
+                            <div>
+                                <select className='building-select' value={buildingId} onChange={(e) => updateSelectedBuilding(e.target.value)}>
+                                    {project.buildings.map(building => (
+                                        <option value={building.id}>{building.name}</option>
+                                    ))}
+                                </select>
+                                <div className='costs-building-details'>
+                                    <div>
+                                        <p className='building-details-text'>Area: {project.buildings.find(b => b.id == buildingId).area}</p>
+                                        <p className='building-details-text'>Floors: {project.buildings.find(b => b.id == buildingId).levels}</p>
+                                        <p className='building-details-text'>Type: {project.buildings.find(b => b.id == buildingId).type}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='costs-files-container'>
+                                <div className='costs-files-header'>
+                                    <p className='costs-files-header-text'>Files uploaded:</p> <div className='upload-file-icon-container' onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
+                                <div className='costs-files'>
+                                    {costs.files.map(file => (
+                                        <FileRow file={file} onDeleteFile={deleteFile} />
+                                    ))}
                                 </div>
                             </div>
                         </div>
-                        <div className='costs-files-container'>
-                            <div className='costs-files-header'>
-                                <p className='costs-files-header-text'>Files uploaded:</p> <div className='upload-file-icon-container' onClick={onUploadFile}> <RiFileUploadLine className='upload-file-icon' /></div></div>
-                            <div className='costs-files'>
-                                {costs.files.map(file => (
-                                    <FileRow file={file} onDeleteFile={deleteFile} />
-                                ))}
+                        <div className='costs-results'>
+                            <div className='costs-number-results'>
+                                <div className='costs-price-m2'>
+                                    <p className='price-excl-vat'>{Math.round(totalPrice / parseInt(project.buildings.find(b => b.id == buildingId).area))}</p>
+                                    <p className='price-excl-vat-text'>price pr. m2 in dkk excl. vat</p>
+                                    <p className='price-incl-vat'>{Math.round(totalPrice / project.buildings.find(b => b.id == buildingId).area * 1.25)}</p>
+                                    <p className='price-incl-vat-text'>price pr. m2 in dkk incl. vat</p>
+                                </div>
+                                <div className='costs-price-total'>
+                                    <p className='price-excl-vat'>{totalPrice}</p>
+                                    <p className='price-excl-vat-text'>total price in dkk excl. vat</p>
+                                    <p className='price-incl-vat'>{totalPrice * 1.25}</p>
+                                    <p className='price-incl-vat-text'>total price in dkk incl. vat</p>
+                                </div>
+                            </div>
+                            <div className='costs-dist-building-parts'>
+                                <p className='graph-header'>Cost distribution for building parts</p>
+                                {totalPrice != 0 ? <img className='graph-image' src={BPPic} />
+                                    : <div></div>
+                                }
+                                <p className='price-excl-vat-text'>price in dkk excl. vat</p>
+                            </div>
+                            <div className='costs-dist-materials'>
+                                <p className='graph-header'>Cost distribution for materials</p>
+                                {totalPrice != 0 ? <img className='graph-image' src={MatPic} />
+                                    : <div></div>
+                                }
+                                <p className='price-excl-vat-text'>price in dkk excl. vat</p>
                             </div>
                         </div>
-                    </div>
-                    <div className='costs-results'>
-                        <div className='costs-number-results'>
-                            <div className='costs-price-m2'>
-                                <p className='price-excl-vat'>{Math.round(totalPrice / parseInt(project.buildings.find(b => b.id == buildingId).area))}</p>
-                                <p className='price-excl-vat-text'>price pr. m2 in dkk excl. vat</p>
-                                <p className='price-incl-vat'>{Math.round(totalPrice / project.buildings.find(b => b.id == buildingId).area * 1.25)}</p>
-                                <p className='price-incl-vat-text'>price pr. m2 in dkk incl. vat</p>
+                        <div className='costs-materials'>
+                            <div className='materials-header'>
+                                <div>
+                                    <p className='materials-header-text'>Materials used in estimation:</p>
+                                </div>
+                                <div className='reset-filters-icon'>
+                                    <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters} />
+                                </div>
                             </div>
-                            <div className='costs-price-total'>
-                                <p className='price-excl-vat'>{totalPrice}</p>
-                                <p className='price-excl-vat-text'>total price in dkk excl. vat</p>
-                                <p className='price-incl-vat'>{totalPrice * 1.25}</p>
-                                <p className='price-incl-vat-text'>total price in dkk incl. vat</p>
+                            <div className="ag-theme-alpine" style={{ height: 261, width: 1192 }}>
+                                <AgGridReact
+                                    ref={gridRef}
+                                    rowData={rowData}
+                                    columnDefs={columnDefs}
+                                    defaultColDef={defaultColDef}
+                                    rowSelection={'single'}
+                                >
+                                </AgGridReact>
                             </div>
-                        </div>
-                        <div className='costs-dist-building-parts'>
-                            <p className='graph-header'>Cost distribution for building parts</p>
-                            {totalPrice != 0 ? <img className='graph-image' src={BPPic} />
-                                : <div></div>
-                            }
-                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>
-                        </div>
-                        <div className='costs-dist-materials'>
-                            <p className='graph-header'>Cost distribution for materials</p>
-                            {totalPrice != 0 ? <img className='graph-image' src={MatPic} />
-                                : <div></div>
-                            }
-                            <p className='price-excl-vat-text'>price in dkk excl. vat</p>
-                        </div>
-                    </div>
-                    <div className='costs-materials'>
-                        <div className='materials-header'>
-                            <div>
-                                <p className='materials-header-text'>Materials used in estimation:</p>
-                            </div>
-                            <div className='reset-filters-icon'>
-                                <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters} />
-                            </div>
-                        </div>
-                        <div className="ag-theme-alpine" style={{ height: 261, width: 1192 }}>
-                            <AgGridReact
-                                ref={gridRef}
-                                rowData={rowData}
-                                columnDefs={columnDefs}
-                                defaultColDef={defaultColDef}
-                                rowSelection={'single'}
-                            >
-                            </AgGridReact>
-                        </div>
-                        <div className='contributor-icons-container'>
+                            <div className='contributor-icons-container'>
                                 <div className='add-material-icon'>
                                     <AiOutlinePlusCircle onClick={addRow} />
                                 </div>
@@ -397,8 +399,10 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                                     <AiOutlineMinusCircle onClick={deleteRow} />
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
+                <Changelog />
             </div>
         </div>
     )
