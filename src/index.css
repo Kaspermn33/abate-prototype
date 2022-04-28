@@ -298,6 +298,7 @@ code {
   line-height: 23px;
   margin-left: 20px;
   margin-right:20px;
+  margin-top: 5px;
 }
 
 .project-details {
@@ -306,14 +307,21 @@ code {
 }
 
 .recent-item {
+  display:flex;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 5px;
   line-height: 23px;
   margin-left: 20px;
   margin-right:20px;
+}
+
+.recent-item-icon {
+  font-size: 16px;
+  padding-top: 4px;
+  padding-right: 5px;
 }
 
 .recent-item:hover {
@@ -325,7 +333,7 @@ code {
 }
 
 .project-name {
-  margin-top: 18px;
+  margin-top: 5px;
   margin-bottom: 0px;
   margin-left: 20px;
 }

@@ -226,7 +226,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
           <Route path="/project/:id" element={<Project projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
-          <Route path="/screening/:id" element={<Screening/>}/>
           <Route path="/newproject" element={<NewProject projects={projects} onAddProject={addProject}/>}/>
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
           <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
