@@ -37,7 +37,7 @@ code {
 
 .header {
   width: 100%;
-  height: 87px;
+  height: 90px;
   line-height: 80px;
   max-height: 88px;
   position: aboslute;
@@ -59,6 +59,7 @@ code {
 }
 
 .header-title {
+  height: 90px;
   padding-left: 20px;
   font-size: 36px;
 }
@@ -558,20 +559,20 @@ code {
 }
 
 .new-project-description {
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .new-project-contributors {
-  margin-top: 80px;
+  margin-top: 62px;
 }
 
 .new-project-buildings {
   display: block;
-  margin-left: 84px;
+  margin-left: 62px;
 }
 
 .creation-buttons {
-  margin-top: 300px;
+  margin-top: 120px;
   display: block;
 }
 

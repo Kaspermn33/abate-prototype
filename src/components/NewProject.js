@@ -139,7 +139,7 @@ const NewProject = ({ projects, onAddProject }) => {
         rowData2 = [...filteredData]
     }, []);
 
-    const [projectName, setProjectName] = useState("");
+    const [projectName, setProjectName] = useState(" ");
     const [projectDescription, setprojectDescription] = useState("");
 
     const navigate = useNavigate();
@@ -191,10 +191,10 @@ const NewProject = ({ projects, onAddProject }) => {
 
     return (
         <div className='main-body'>
-            <Header title={'Header palceholder'} />
+            <Header title={projectName} />
             <div className='newproject'>
                 <div>
-                    <h1>Project creation</h1>
+                    <h1 className='page-sub-header'>Project creation</h1>
                 </div>
                 <div className='new-project-main'>
                     <div className='new-project-left'>
@@ -209,7 +209,7 @@ const NewProject = ({ projects, onAddProject }) => {
 
                         <div className='new-project-contributors'>
 
-                            <div className="ag-theme-alpine" style={{ height: 400, width: 344 }}>
+                            <div className="ag-theme-alpine" style={{ height: 260, width: 344 }}>
                                 <AgGridReact
                                     ref={gridRef1}
                                     rowData={rowData1}
@@ -234,7 +234,7 @@ const NewProject = ({ projects, onAddProject }) => {
                             <div>
                                 <h3>Buildings</h3>
                             </div>
-                            <div className="ag-theme-alpine" style={{ height: 400, width: 830 }}>
+                            <div className="ag-theme-alpine" style={{ height: 345, width: 830 }}>
                                 <AgGridReact
                                     ref={gridRef2}
                                     rowData={rowData2}
