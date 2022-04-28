@@ -379,7 +379,7 @@ const Costs = ({ projects, onSetCurrentProject }) => {
                                 <GrPowerReset className='smaller-reset-filters-icon' onClick={clearFilters} />
                             </div>
                         </div>
-                        <div className="ag-theme-alpine" style={{ height: 350, width: 1192 }}>
+                        <div className="ag-theme-alpine" style={{ height: 261, width: 1192 }}>
                             <AgGridReact
                                 ref={gridRef}
                                 rowData={rowData}
