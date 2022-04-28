@@ -959,9 +959,13 @@ code {
   border-radius: 6px;
 }
 
+.screening-model-container {
+  font-family: "Poppins";
+}
+
 .model-header {
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   text-align: center;
 }
 
@@ -972,7 +976,7 @@ code {
 }
 
 .material-radio-button-group {
-  
+  height: 45px;
   display: flex;
   justify-content: space-between;
 }
@@ -982,8 +986,8 @@ code {
 }
 
 .model-selection-header{ 
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .material-radio-button input[type="radio"] {
@@ -1003,7 +1007,7 @@ input[type="radio"]:checked {
   text-align: center;
   font-size: 10px;
   max-width: 47px;
-  margin-top: -35px;
+  margin-top: -40px;
   margin-left: 8px;
 }
 

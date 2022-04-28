@@ -97,7 +97,7 @@ const ScreeningModel = ({ title, materialSelection, onUpdateScreening }) => {
 
 
     return (
-        <div>
+        <div className='screening-model-container'>
             <h2 className='model-header'>{title}</h2>
             <div className='material-radio-button-group-container' >
                 <h3 className='model-selection-header'>Outer walls - Bearing</h3>
