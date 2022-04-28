@@ -85,11 +85,30 @@ code {
   display: flex;
 }
 
-.user {
+.user-container {
   justify-content:flex-end;
+  display:flex;
   font-family: 'Poppins';
   text-align: right;
   margin-left: -20px;
+  max-height: 90px;
+  margin-right: 40px;
+}
+
+.user-icon {
+  font-size: 32px;
+  padding-top: 5px;
+}
+
+.user-name {
+  font-family: "Poppins";
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.user-bell {
+  font-size: 22px;
+  padding-top: 2px;
 }
 
 .dashboard {
