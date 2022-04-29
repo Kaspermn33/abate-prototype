@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard';
 import NewProject from './components/NewProject';
 import UpdateProject from './components/UpdateProject';
 import Costs from './components/Costs';
+import Lca from './components/Lca';
 function App() {
   const [projects, setProjects] = useState([
     {
@@ -72,8 +73,44 @@ function App() {
       lca: [
         {
           id: 0,
-          name: 'lca 1',
+          name: 'Lca 1',
           lastEdit: 'April 6',
+          buildingId: 0, 
+          files: [
+            {
+              id: 0,
+              name: 'hindbærkræt-materials.csv',
+            },
+            {
+              id: 1,
+              name: 'hindbærkræt-materials1.csv',
+            },
+          ],
+          materials : [
+            {
+              id: 0,
+              part_id: 'beof_roof_1',
+              file_id: 0,
+              build_part: 'Roof',
+              mat_name: 'Screen tiles',
+              db: 'AECdat',
+              mat_id: 'IDID2222',
+              quantity: 30,
+              unit: 'm2'
+            },
+            {
+              id: 1,
+              part_id: 'beof_roof_2',
+              file_id: 1,
+              build_part: 'Roof',
+              mat_name: 'Screen tiles',
+              db: 'AECdat',
+              mat_id: 'IDID2222',
+              quantity: 30,
+              unit: 'm2'
+            },
+
+          ]
         }
       ],
       costs: [
@@ -230,6 +267,7 @@ function App() {
           <Route path="/project/:id/update" element={<UpdateProject projects={projects} onUpdateProject={updateProject}/>}/>
           <Route path='/project/:id/cost/:costid' element={<Costs projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
           <Route path='project/:id/screening/:screeningid' element={<Screening projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
+          <Route path='project/:id/lca/:lcaid' element={<Lca projects={projects} onSetCurrentProject={onSetCurrentProject}/>}/>
         </Routes>
       </Router>
     </div>

@@ -172,8 +172,8 @@ const UpdateProject = ({ projects, onUpdateProject }) => {
             lastEdit: months[today.getMonth()] + " " + today.getDate(),
             contributors: rowData1
             ,
-            screenings: [],
-            lca: [],
+            screenings: project.screenings,
+            lca: project.lca,
             costs: project.costs,
             buildings: rowData2
         }

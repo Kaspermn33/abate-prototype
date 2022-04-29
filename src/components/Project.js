@@ -55,6 +55,34 @@ const Project = ({ projects, onSetCurrentProject }) => {
     navigate(generatePath('cost/' + newId))
   }
 
+  const onNewLca = () => {
+    let newId = checkLcaID(project.lca.length)
+    let temp = {
+      id: newId,
+      name: 'New lca estimation' + newId,
+      lastEdit: getDate(),
+      buildingId: 0, 
+      files: [],
+      materials : []
+    }
+    project.lca.push(temp)
+
+    let tempProject = {
+      id: project.id,
+      name: project.name,
+      description: project.description,
+      lastEdit: getDate(),
+      contributors: project.contributors,
+      screenings: project.screenings,
+      lca: project.lca,
+      costs: project.costs,
+      buildings: project.buildings
+    }
+    project = tempProject;
+    onSetCurrentProject(tempProject);
+    navigate(generatePath('lca/' + newId))
+  }
+
   const onNewScreening = () => {
     let newId = checkScreeningID(project.screenings.length)
 
@@ -124,6 +152,16 @@ const Project = ({ projects, onSetCurrentProject }) => {
     return id;
   }
 
+  const checkLcaID = (id) => {
+    for (let i = 0; i < project.lca.length; i++) {
+        if (id == project.lca[i].id) {
+            id++;
+            return checkLcaID(id)
+        }
+    }
+    return id;
+  }
+
   const checkScreeningID = (id) => {
     for (let i = 0; i < project.screenings.length; i++) {
         if (id == project.screenings[i].id) {
@@ -168,7 +206,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
                 <FaRecycle className='lca-box-header-icon'/><h2 className='project-box-header-text'>LCA</h2>
               </div>
               <div className='box-type'>
-                <div className='new-box'>
+                <div className='new-box' onClick={onNewLca}>
                   <BoxHeader title={"New"} />
                   <p className='project-text'>Creates a new empty Life Cycle Analysis estimation</p>
                 </div>
