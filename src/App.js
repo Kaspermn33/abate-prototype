@@ -188,23 +188,9 @@ function App() {
           name: 'Rasmus'
         }
       ],
-      screenings: [
-        {
-          id: 0,
-          name: 'Screening 1',
-          lastEdit: 'April 6',
-        }
-      ],
-      lca: [
-        {
-          id: 0,
-          name: 'lca 1',
-          lastEdit: 'April 6',
-        }
-      ],
-      costs: [
-        
-      ],
+      screenings: [],
+      lca: [],
+      costs: [],
       buildings: [
         {
           id: 0,
