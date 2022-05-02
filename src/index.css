@@ -1122,7 +1122,8 @@ input[type="radio"]:checked {
 }
 
 .screening-building-details-text { 
-  margin-top: 9px;
+  font-family: "Poppins";
+  margin-top: 7px;
   margin-bottom: 0px;
   margin-left: 15px;
   font-size: 14px;
