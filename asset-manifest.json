@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/%7Babate-prototype%7D/static/css/main.4f55b344.css",
+    "main.js": "/%7Babate-prototype%7D/static/js/main.4a683fd1.js",
+    "static/js/787.2d7107a5.chunk.js": "/%7Babate-prototype%7D/static/js/787.2d7107a5.chunk.js",
+    "static/media/logo.png": "/%7Babate-prototype%7D/static/media/logo.18eed1739a9dc4c02bde.png",
+    "static/media/model.png": "/%7Babate-prototype%7D/static/media/model.5501389709e75613e76c.png",
+    "index.html": "/%7Babate-prototype%7D/index.html",
+    "main.4f55b344.css.map": "/%7Babate-prototype%7D/static/css/main.4f55b344.css.map",
+    "main.4a683fd1.js.map": "/%7Babate-prototype%7D/static/js/main.4a683fd1.js.map",
+    "787.2d7107a5.chunk.js.map": "/%7Babate-prototype%7D/static/js/787.2d7107a5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f55b344.css",
+    "static/js/main.4a683fd1.js"
+  ]
+}
