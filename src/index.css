@@ -581,18 +581,24 @@ code {
   background: rgba(255, 255, 255, 0.44);
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  border-radius: 15px;
+  border-radius: 6px;
   width: 344px;
   height: 66px;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 16px;
 }
 
 .input-project-description {
   background: rgba(255, 255, 255, 0.44);
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  border-radius: 15px;
+  border-radius: 6px;
   width: 340px;
   height: 153px;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 16px;
 }
 
 .new-project-name {

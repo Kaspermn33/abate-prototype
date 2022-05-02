@@ -199,12 +199,13 @@ const NewProject = ({ projects, onAddProject }) => {
                 <div className='new-project-main'>
                     <div className='new-project-left'>
                         <div className='new-project-name'>
-                            <h3>Project Name</h3>
-                            <input value={projectName} onChange={(e) => setProjectName(e.target.value)} className='input-project-name' type='text' placeholder='Project name' />
+                            <h3>Name</h3>
+
+                            <textarea value={projectName} onChange={(e) => setProjectName(e.target.value)} className='input-project-name' />
                         </div>
                         <div className='new-project-description'>
                             <h3>Description</h3>
-                            <input value={projectDescription} onChange={(e) => setprojectDescription(e.target.value)} className='input-project-description' type='text' placeholder='Project description' />
+                            <textarea value={projectDescription} onChange={(e) => setprojectDescription(e.target.value)} className='input-project-description' />
                         </div>
 
                         <div className='new-project-contributors'>
