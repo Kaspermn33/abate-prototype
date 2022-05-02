@@ -245,7 +245,7 @@ function App() {
   return (
     <div className='app'>
       <Router>
-        <Navbar project={currentProject}/>
+        <Navbar project={currentProject} onSetCurrentProject={onSetCurrentProject}/>
         <Routes>
           <Route path="/" element={<Dashboard onUpdate={onSetProjectSelected} projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />
           <Route path="/project/:id" element={<Project projects={projects} onSetCurrentProject={onSetCurrentProject}/>} />

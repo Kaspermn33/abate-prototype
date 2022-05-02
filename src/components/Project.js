@@ -31,7 +31,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
     let newId = checkCostID(project.costs.length)
     let temp = {
       id: newId,
-      name: 'New cost estimation' + newId,
+      name: 'Cost estimation' + newId,
       lastEdit: getDate(),
       buildingId: 0, 
       files: [],
@@ -59,7 +59,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
     let newId = checkLcaID(project.lca.length)
     let temp = {
       id: newId,
-      name: 'New lca estimation' + newId,
+      name: 'Lca estimation' + newId,
       lastEdit: getDate(),
       buildingId: 0, 
       files: [],
