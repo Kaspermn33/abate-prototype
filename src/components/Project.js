@@ -1,4 +1,5 @@
 import { FaFolder } from 'react-icons/fa'
+import React from 'react'
 import { useParams } from 'react-router-dom';
 import BoxHeader from './BoxHeader';
 import RecentItem from './RecentItem';
@@ -7,6 +8,9 @@ import { VscGraph } from 'react-icons/vsc'
 import { BiCoinStack } from 'react-icons/bi'
 import {HiOutlineCog} from 'react-icons/hi'
 import { useNavigate, generatePath } from "react-router-dom";
+import { BiCog } from 'react-icons/bi'
+import Dropdown from "react-bootstrap/Dropdown";
+import styles from "./foo.module.scss";
 
 import Header from './Header'
 const Project = ({ projects, onSetCurrentProject }) => {
@@ -81,7 +85,7 @@ const Project = ({ projects, onSetCurrentProject }) => {
     project = tempProject;
     onSetCurrentProject(tempProject);
     navigate(generatePath('lca/' + newId))
-  }
+  } 
 
   const onNewScreening = () => {
     let newId = checkScreeningID(project.screenings.length)
@@ -172,12 +176,32 @@ const Project = ({ projects, onSetCurrentProject }) => {
     return id;
   }
 
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+
+    <a href="/" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
+      {children}
+      <BiCog className='costs-settings-cog' />
+    </a>
+  ));
+
   return (
     <div className='main-body'>
       <Header title={project.name} />
       <div className='project'>
-        <div>
+        <div className='project-header'>
           <h1 className='page-sub-header'>Project</h1>
+          <div className='screening-header-right'>
+            <div>
+              <Dropdown className={styles.bootstrap}>
+                <Dropdown.Toggle as={CustomToggle} />
+                <Dropdown.Menu size="sm" title="bla">
+                  <Dropdown.Item>Export</Dropdown.Item>
+                  <Dropdown.Item>Delete</Dropdown.Item>
+                  <Dropdown.Item>Manage</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
         </div>
         <div className='project-main'>
           <div className='project-left'>

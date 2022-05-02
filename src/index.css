@@ -187,6 +187,12 @@ code {
   font-family: "Poppins";
 }
 
+.project-header {
+  width: 1504px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .projects-body {
   margin-top: -10px;
 }
