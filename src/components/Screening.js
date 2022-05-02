@@ -7,6 +7,7 @@ import styles from "./foo.module.scss";
 import ScreeningModel from './ScreeningModel';
 import allModelsPic from './all-models.png';
 import noAllModelsPic from './no-all-models.png';
+import Changelog from './Changelog';
 
 const Screening = ({ projects, onSetCurrentProject }) => {
   const { id, screeningid } = useParams()
@@ -114,6 +115,7 @@ const Screening = ({ projects, onSetCurrentProject }) => {
   return (
     <div className='main-body'>
       <Header title={project.name} />
+      <div className='screening-container'>
       <div className='screening'>
         <div className='screening-header'>
           <input className='costs-header-name' type='text' value={screeningName} onChange={(e) => updateScreeningName(e.target.value)} />
@@ -170,6 +172,10 @@ const Screening = ({ projects, onSetCurrentProject }) => {
           </div>
         </div>
       </div>
+      <div>
+        <Changelog/>
+      </div>
+    </div>
     </div>
   )
 }

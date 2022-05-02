@@ -985,10 +985,11 @@ code {
 
 .screening-header {
   display: flex;
+  justify-content:space-between;
 }
 
 .screening-header-right {
-  margin-left: 945px;
+  margin-left: 825px;
 }
 
 .screening-models {
@@ -1144,6 +1145,11 @@ input[type="radio"]:checked {
   display: flex;
   justify-content: space-between;
   
+}
+
+.screening-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .changelog {
