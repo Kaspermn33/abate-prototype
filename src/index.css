@@ -161,6 +161,7 @@ code {
 
 .new-project:hover {
   background-color: #F1F2F7;
+  cursor: pointer;
 }
 
 .your-projects {
@@ -292,6 +293,7 @@ code {
 
 .project-item:hover {
   background-color: #F1F2F7;
+  cursor: pointer;
 }
 
 .search-projects {
@@ -359,6 +361,7 @@ code {
 
 .recent-item:hover {
   background-color: #F1F2F7;
+  cursor: pointer;
 }
 
 .cont-desc-box {
@@ -411,6 +414,7 @@ code {
 
 .new-box:hover {
   background-color:#F1F2F7;
+  cursor: pointer;
 }
 
 .screening-box {
@@ -437,6 +441,7 @@ code {
 
 .manage-project-box:hover {
   background-color:#F1F2F7;
+  cursor: pointer;
 }
 
 .new-box {
@@ -515,10 +520,12 @@ code {
 
 .remove-contributor-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 .add-contributor-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 
@@ -549,10 +556,12 @@ code {
 
 .remove-building-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 .add-building-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 .new-project-main {
@@ -621,6 +630,7 @@ code {
 
 .project-create-button:hover {
   background-color:#082850;
+  cursor: pointer;
 }
 
 .cancel-button {
@@ -634,6 +644,7 @@ code {
 
 .cancel-button:hover {
   background-color: #aeafb1;
+  cursor: pointer;
 }
 
 .search-project-body {
@@ -671,6 +682,7 @@ code {
 
 .costs-settings-cog:hover {
   background-color: #aeafb1;
+  cursor: pointer;
 }
 
 .building-select {
@@ -846,6 +858,7 @@ code {
 
 .upload-file-icon-container:hover {
   background-color: #aeafb1;
+  cursor: pointer;
 }
 
 .materials-header {
@@ -863,6 +876,7 @@ code {
 
 .reset-filters-icon:hover {
   background-color: #aeafb1;
+  cursor: pointer;
 }
 
 .add-material-icon {
@@ -877,6 +891,7 @@ code {
 
 .add-material-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 .remove-material-icon {
@@ -891,6 +906,7 @@ code {
 
 .remove-material-icon:hover {
   background-color:#aeafb1;
+  cursor: pointer;
 }
 
 .smaller-reset-filters-icon {
@@ -920,6 +936,7 @@ code {
 
 .file-row-dots:hover {
   background-color: darkgrey;
+  cursor: pointer;
 }
 
 .costs-file {
@@ -1016,6 +1033,10 @@ code {
   justify-content: space-between;
 }
 
+.material-radio-checkmark:hover {
+  cursor: pointer;
+}
+
 .material-radio-button {
 
 }
@@ -1044,6 +1065,7 @@ input[type="radio"]:checked {
   max-width: 47px;
   margin-top: -40px;
   margin-left: 8px;
+  cursor: pointer;
 }
 
 .screening-model-picture {
